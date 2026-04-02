@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://cf7e1p6d3aolt"]
+
+[ext_resource type="Script" uid="uid://cofdkmx3l7kp5" path="res://shard.gd" id="1_wmd2y"]
+[ext_resource type="Texture2D" uid="uid://chks8f75txysc" path="res://echoveil/platforms/Rocks/26BD4AED-AB96-4AD0-B798-DAE0D240A86D 2.png" id="2_ccq4d"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wwitk"]
+size = Vector2(952, 775)
+
+[node name="shard" type="Area2D" unique_id=375502951]
+collision_layer = 8
+script = ExtResource("1_wmd2y")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2127719599]
+texture = ExtResource("2_ccq4d")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=411143526]
+position = Vector2(-50, -42.5)
+shape = SubResource("RectangleShape2D_wwitk")
