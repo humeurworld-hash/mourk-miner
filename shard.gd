@@ -55,5 +55,8 @@ func _fly_to_counter() -> void:
 	tween.tween_property(sprite, "scale", Vector2(0.008, 0.008), 0.3).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
 	tween.chain().tween_callback(func():
 		GameState.shards_collected += 1
+		# Every 25 shards grant 1 life (up to max 3)
+		if GameState.shards_collected % 25 == 0 and GameState.health < 3:
+			GameState.health = min(3, GameState.health + 1)
 		anim_layer.queue_free()
 	)

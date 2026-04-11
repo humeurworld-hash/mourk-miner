@@ -9,6 +9,7 @@ const PICKAXE_DAMAGE = 1
 var can_swing: bool = true
 var facing_right: bool = true
 var can_break: bool = true
+var is_dead: bool = false
 
 @onready var axe: Sprite2D = $Axe
 @onready var body_sprite: AnimatedSprite2D = $AnimatedSprite2D
@@ -16,7 +17,6 @@ var can_break: bool = true
 @onready var swing_sound: AudioStreamPlayer = AudioStreamPlayer.new()
 @onready var strike_sound: AudioStreamPlayer = AudioStreamPlayer.new()
 @onready var lightning_sound: AudioStreamPlayer = AudioStreamPlayer.new()
-
 
 var shards_collected: int:
 	get: return GameState.shards_collected
@@ -47,6 +47,14 @@ func _ready() -> void:
 	fuse_sprite.play(&"idle")
 
 func _physics_process(delta: float) -> void:
+	if is_dead:
+		return
+
+	# DEATH CHECK
+	if GameState.health <= 0:
+		_die()
+		return
+
 	# GRAVITY
 	if not is_on_floor():
 		velocity.y += GRAVITY * delta
@@ -83,6 +91,37 @@ func _physics_process(delta: float) -> void:
 		_lightning_strike()
 
 	move_and_slide()
+
+func _die() -> void:
+	is_dead = true
+	set_physics_process(false)
+	velocity = Vector2.ZERO
+
+	# Fuse panics
+	fuse_sprite.play(&"panic")
+	body_sprite.play(&"idle")
+
+	# Red screen flash
+	var flash_layer = CanvasLayer.new()
+	flash_layer.layer = 30
+	get_parent().add_child(flash_layer)
+
+	var flash = ColorRect.new()
+	flash.color = Color(1, 0, 0, 0.0)
+	flash.set_anchors_preset(Control.PRESET_FULL_RECT)
+	flash_layer.add_child(flash)
+
+	var tween = create_tween()
+	tween.tween_property(flash, "color", Color(1, 0, 0, 0.65), 0.3)
+	tween.tween_property(flash, "color", Color(1, 0, 0, 0.45), 1.0)
+
+	# Reset for respawn (keep shards)
+	GameState.health = 3
+	GameState.lives = 0
+
+	var scene_path = get_tree().current_scene.scene_file_path
+	await get_tree().create_timer(1.8).timeout
+	get_tree().call_deferred("change_scene_to_file", scene_path)
 
 func swing_pickaxe() -> void:
 	can_swing = false

@@ -41,4 +41,15 @@ animations = [{
 "loop": false,
 "name": &"react",
 "speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AT_fr0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AT_fr1")
+}],
+"loop": true,
+"name": &"panic",
+"speed": 10.0
 }]
