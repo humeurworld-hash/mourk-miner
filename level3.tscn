@@ -60,10 +60,9 @@ scale = Vector2(1.0000038, 0.9114)
 modulate = Color(0.50, 0.10, 0.10, 1)
 texture = ExtResource("2_l3near")
 
-[node name="Player" type="CharacterBody2D" parent="." unique_id=6000000008]
+[node name="Player" type="CharacterBody2D" parent="." unique_id=6000000008 groups=["player"]]
 position = Vector2(200, 100)
 script = ExtResource("3_l3player")
-groups = ["player"]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player" unique_id=6000000009]
 position = Vector2(3, 226)

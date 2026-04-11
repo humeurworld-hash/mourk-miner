@@ -9,6 +9,7 @@ var hover_time: float = 0.0
 var damage_cooldown: float = 0.0
 var stunned: bool = false
 var stun_timer: float = 0.0
+var stun_tween: Tween = null
 
 func _ready() -> void:
 	add_to_group("drone")
@@ -20,12 +21,10 @@ func _process(delta: float) -> void:
 	if damage_cooldown > 0:
 		damage_cooldown -= delta
 
-	# Handle stun
 	if stunned:
 		stun_timer -= delta
 		if stun_timer <= 0:
-			stunned = false
-			modulate = Color(1, 1, 1, 1)
+			_end_stun()
 		return
 
 	# Patrol left/right
@@ -38,7 +37,7 @@ func _process(delta: float) -> void:
 	hover_time += delta * 2.5
 	position.y = start_y + sin(hover_time) * 12.0
 
-	# Active overlap check
+	# Damage player on contact
 	if damage_cooldown <= 0:
 		for body in get_overlapping_bodies():
 			if body.is_in_group("player"):
@@ -48,15 +47,26 @@ func _process(delta: float) -> void:
 				break
 
 func stun(duration: float) -> void:
+	# Kill any running stun tween before starting a new one
+	if stun_tween:
+		stun_tween.kill()
 	stunned = true
 	stun_timer = duration
-	# Show stunned state: dim blue-white flicker
-	var tween = create_tween().set_loops(int(duration / 0.3))
-	tween.tween_property(self, "modulate", Color(0.4, 0.6, 1.0, 0.6), 0.15)
-	tween.tween_property(self, "modulate", Color(0.6, 0.8, 1.0, 0.4), 0.15)
+	var loops = max(1, int(duration / 0.3))
+	stun_tween = create_tween().set_loops(loops)
+	stun_tween.tween_property(self, "modulate", Color(0.4, 0.6, 1.0, 0.6), 0.15)
+	stun_tween.tween_property(self, "modulate", Color(0.6, 0.8, 1.0, 0.4), 0.15)
+
+func _end_stun() -> void:
+	stunned = false
+	stun_timer = 0.0
+	if stun_tween:
+		stun_tween.kill()
+		stun_tween = null
+	modulate = Color(1, 1, 1, 1)
 
 func take_damage(_amount: int) -> void:
-	# Axe briefly stuns the drone (doesn't kill it)
+	# Axe briefly stuns — only if not already stunned
 	if not stunned:
 		stun(1.5)
 
