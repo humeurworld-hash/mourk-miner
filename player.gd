@@ -13,6 +13,8 @@ var can_break: bool = true
 @onready var axe: Sprite2D = $Axe
 @onready var body_sprite: Sprite2D = $Sprite2D
 @onready var swing_sound: AudioStreamPlayer = AudioStreamPlayer.new()
+@onready var strike_sound: AudioStreamPlayer = AudioStreamPlayer.new()
+@onready var lightning_sound: AudioStreamPlayer = AudioStreamPlayer.new()
 
 signal pickaxe_hit(hit_position: Vector2, direction: float)
 
@@ -32,6 +34,14 @@ func _ready() -> void:
 	swing_sound.stream = load("res://echoveil/music/animations/axe swing.mp3")
 	swing_sound.volume_db = -15.0
 	add_child(swing_sound)
+
+	strike_sound.stream = load("res://echoveil/music/animations/axe strike.mp3")
+	strike_sound.volume_db = -10.0
+	add_child(strike_sound)
+
+	lightning_sound.stream = load("res://echoveil/music/animations/axe strike.mp3")
+	lightning_sound.volume_db = -5.0
+	add_child(lightning_sound)
 
 func _physics_process(delta: float) -> void:
 	# GRAVITY
@@ -86,6 +96,9 @@ func swing_pickaxe() -> void:
 	query.collide_with_areas = true
 	var results = space.intersect_point(query)
 
+	if results.size() > 0:
+		strike_sound.play()
+
 	for result in results:
 		var body = result.collider
 		if body.has_method("take_damage"):
@@ -99,18 +112,33 @@ func _lightning_strike() -> void:
 	can_break = false
 	GameState.lives = 0
 
-	# Screen flash
-	var flash = ColorRect.new()
-	flash.color = Color(0.9, 0.0, 1.0, 0.55)
-	flash.set_anchors_preset(Control.PRESET_FULL_RECT)
+	lightning_sound.play()
+
+	# Lightning image + screen flash overlay
 	var flash_layer = CanvasLayer.new()
 	flash_layer.layer = 30
 	get_parent().add_child(flash_layer)
+
+	# Background flash
+	var flash = ColorRect.new()
+	flash.color = Color(0.9, 0.0, 1.0, 0.45)
+	flash.set_anchors_preset(Control.PRESET_FULL_RECT)
 	flash_layer.add_child(flash)
 
+	# Lightning sprite centered on screen
+	var bolt = Sprite2D.new()
+	bolt.texture = load("res://echoveil/Animations/axe lightning.png")
+	bolt.position = flash_layer.get_viewport().get_visible_rect().size * 0.5
+	bolt.scale = Vector2(0.6, 0.6)
+	bolt.modulate = Color(1.0, 0.5, 1.0, 1.0)
+	flash_layer.add_child(bolt)
+
+	# Fade out both
 	var tween = create_tween()
-	tween.tween_property(flash, "color", Color(0.9, 0.0, 1.0, 0.0), 0.5)
-	tween.tween_callback(flash_layer.queue_free)
+	tween.set_parallel(true)
+	tween.tween_property(flash, "color", Color(0.9, 0.0, 1.0, 0.0), 0.6)
+	tween.tween_property(bolt, "modulate", Color(1.0, 0.5, 1.0, 0.0), 0.6)
+	tween.chain().tween_callback(flash_layer.queue_free)
 
 	# Stun all drones
 	for drone in get_tree().get_nodes_in_group("drone"):
