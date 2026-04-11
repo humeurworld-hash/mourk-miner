@@ -71,6 +71,7 @@ func swing_pickaxe() -> void:
 	var query = PhysicsPointQueryParameters2D.new()
 	query.position = hit_pos
 	query.collision_mask = 2
+	query.collide_with_areas = true
 	var results = space.intersect_point(query)
 
 	for result in results:

@@ -12,6 +12,7 @@
 [ext_resource type="Script" uid="uid://dwkpblhyl2ow0" path="res://level_exit.gd" id="10_exit"]
 [ext_resource type="AudioStream" uid="uid://wjgw140fk230" path="res://echoveil/music/Mist in the Circuit-2.mp3" id="11_music"]
 [ext_resource type="Texture2D" uid="uid://chks8f75txysc" path="res://echoveil/platforms/Rocks/26BD4AED-AB96-4AD0-B798-DAE0D240A86D 2.png" id="12_shardicon"]
+[ext_resource type="PackedScene" path="res://drone.tscn" id="13_drone"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e2o6t"]
 size = Vector2(114, 122)
@@ -20,10 +21,10 @@ size = Vector2(114, 122)
 size = Vector2(54.5, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_leftfloor"]
-size = Vector2(1900, 20)
+size = Vector2(2700, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rightfloor"]
-size = Vector2(180, 20)
+size = Vector2(130, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_exit"]
 size = Vector2(120, 131)
@@ -41,6 +42,10 @@ texture = ExtResource("1_05srh")
 
 [node name="Sprite2D2" type="Sprite2D" parent="background/farlayer" unique_id=258002563]
 position = Vector2(1789, 362)
+texture = ExtResource("1_05srh")
+
+[node name="Sprite2D3" type="Sprite2D" parent="background/farlayer" unique_id=258002564]
+position = Vector2(3053, 362)
 texture = ExtResource("1_05srh")
 
 [node name="nearlayer" type="ParallaxLayer" parent="background" unique_id=1278689398]
@@ -85,13 +90,13 @@ collision_mask = 2
 collide_with_areas = true
 
 [node name="FloorLeft" type="StaticBody2D" parent="." unique_id=2012210779]
-position = Vector2(750, 619)
+position = Vector2(1150, 619)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FloorLeft" unique_id=472077029]
 shape = SubResource("RectangleShape2D_leftfloor")
 
 [node name="FloorRight" type="StaticBody2D" parent="." unique_id=2012210780]
-position = Vector2(1910, 619)
+position = Vector2(2685, 619)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FloorRight" unique_id=472077030]
 shape = SubResource("RectangleShape2D_rightfloor")
@@ -137,16 +142,34 @@ position = Vector2(435, 572)
 position = Vector2(700, 572)
 
 [node name="rock3" parent="." unique_id=1932664037 instance=ExtResource("8_7eaep")]
-position = Vector2(950, 572)
+position = Vector2(980, 572)
 
 [node name="rock4" parent="." unique_id=1932664038 instance=ExtResource("8_7eaep")]
-position = Vector2(1200, 572)
+position = Vector2(1250, 572)
 
 [node name="rock5" parent="." unique_id=1932664039 instance=ExtResource("8_7eaep")]
-position = Vector2(1500, 572)
+position = Vector2(1550, 572)
+
+[node name="rock6" parent="." unique_id=1932664044 instance=ExtResource("8_7eaep")]
+position = Vector2(1800, 572)
+
+[node name="rock7" parent="." unique_id=1932664045 instance=ExtResource("8_7eaep")]
+position = Vector2(2050, 572)
+
+[node name="rock8" parent="." unique_id=1932664046 instance=ExtResource("8_7eaep")]
+position = Vector2(2250, 572)
+
+[node name="rock9" parent="." unique_id=1932664047 instance=ExtResource("8_7eaep")]
+position = Vector2(2420, 572)
+
+[node name="Drone1" parent="." unique_id=1932664048 instance=ExtResource("13_drone")]
+position = Vector2(850, 538)
+
+[node name="Drone2" parent="." unique_id=1932664049 instance=ExtResource("13_drone")]
+position = Vector2(1680, 538)
 
 [node name="LevelExit" type="Area2D" parent="." unique_id=1932664040]
-position = Vector2(1760, 680)
+position = Vector2(2560, 680)
 script = ExtResource("10_exit")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LevelExit" unique_id=1932664041]
