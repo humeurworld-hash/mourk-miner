@@ -115,7 +115,8 @@ func _die() -> void:
 	tween.tween_property(flash, "color", Color(1, 0, 0, 0.65), 0.3)
 	tween.tween_property(flash, "color", Color(1, 0, 0, 0.45), 1.0)
 
-	# Reset for respawn (keep shards)
+	# Reset for respawn
+	GameState.shards_collected = 0
 	GameState.health = 3
 	GameState.lives = 0
 

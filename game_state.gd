@@ -5,8 +5,6 @@ var health: int = 3
 var lives: int = 0
 const SAVE_PATH = "user://mourk_save.json"
 
-func _ready() -> void:
-	load_data()
 
 func save() -> void:
 	var data = {
