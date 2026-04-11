@@ -23,6 +23,13 @@ func take_damage(amount: int) -> void:
 		position, 0.05)
 
 func spawn_shards() -> void:
+	# Play break sound at the rock's position before freeing
+	var break_sound = AudioStreamPlayer.new()
+	break_sound.stream = load("res://echoveil/music/animations/Rock break.mp3")
+	get_parent().add_child(break_sound)
+	break_sound.play()
+	break_sound.finished.connect(break_sound.queue_free)
+
 	# Drop 2 shards when the rock breaks
 	for i in range(2):
 		if shard_scene:

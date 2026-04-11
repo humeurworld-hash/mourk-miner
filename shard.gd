@@ -20,5 +20,12 @@ func _on_body_entered(body: Node2D) -> void:
 			body.collect_shard()
 		else:
 			body.shards_collected += 1
-		# Delete the shard
+
+		# Play collect sound then free
+		var collect_sound = AudioStreamPlayer.new()
+		collect_sound.stream = load("res://echoveil/music/animations/shard revel.mp3")
+		get_parent().add_child(collect_sound)
+		collect_sound.play()
+		collect_sound.finished.connect(collect_sound.queue_free)
+
 		queue_free()

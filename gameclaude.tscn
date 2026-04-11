@@ -1,13 +1,17 @@
 [gd_scene format=3 uid="uid://b0uuaa3shw8mu"]
 
+[ext_resource type="PackedScene" path="res://touch_controls.tscn" id="0_touch"]
 [ext_resource type="Texture2D" uid="uid://6r3wvh6f772y" path="res://echoveil/backgrounds/farback.PNG" id="1_05srh"]
 [ext_resource type="Texture2D" uid="uid://babv60bw0cyec" path="res://echoveil/backgrounds/foreground.png" id="3_xu2g3"]
 [ext_resource type="Script" uid="uid://dp6vls7m6rpgi" path="res://player.gd" id="4_jep2d"]
 [ext_resource type="Texture2D" uid="uid://caqlyshv6hael" path="res://echoveil/forme/Remove background project 2.PNG" id="5_hirbh"]
 [ext_resource type="Script" uid="uid://uewak7cunake" path="res://hud.gd" id="7_05srh"]
 [ext_resource type="PackedScene" uid="uid://cvkjl5w0rnr51" path="res://rock.tscn" id="8_7eaep"]
-[ext_resource type="Texture2D" path="res://echoveil/forme/Glowing fantasy battle axe design.png" id="9_axe"]
-[ext_resource type="Script" path="res://level_exit.gd" id="10_exit"]
+[ext_resource type="Texture2D" uid="uid://d2skcubfsp1m" path="res://echoveil/forme/Glowing fantasy battle axe design.png" id="9_axe"]
+[ext_resource type="Texture2D" uid="uid://cw1wyoi6ixc0a" path="res://echoveil/platforms/IMG_2812 2.png" id="9_jep2d"]
+[ext_resource type="Script" uid="uid://dwkpblhyl2ow0" path="res://level_exit.gd" id="10_exit"]
+[ext_resource type="AudioStream" uid="uid://dv35dvk00m4r" path="res://echoveil/music/Mist in the Circuit.mp3" id="11_music"]
+[ext_resource type="Texture2D" uid="uid://chks8f75txysc" path="res://echoveil/platforms/Rocks/26BD4AED-AB96-4AD0-B798-DAE0D240A86D 2.png" id="12_shardicon"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e2o6t"]
 size = Vector2(114, 122)
@@ -22,7 +26,7 @@ size = Vector2(1900, 20)
 size = Vector2(180, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_exit"]
-size = Vector2(120, 100)
+size = Vector2(120, 131)
 
 [node name="Game" type="Node2D" unique_id=1161058939]
 
@@ -92,23 +96,39 @@ position = Vector2(1910, 619)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FloorRight" unique_id=472077030]
 shape = SubResource("RectangleShape2D_rightfloor")
 
-
 [node name="HUD" type="CanvasLayer" parent="." unique_id=1395744975]
 script = ExtResource("7_05srh")
 
+[node name="ShardIcon" type="TextureRect" parent="HUD" unique_id=87802620]
+offset_left = 15.0
+offset_top = 15.0
+offset_right = 47.0
+offset_bottom = 36.0
+texture = ExtResource("12_shardicon")
+expand_mode = 1
+stretch_mode = 6
+
 [node name="ShardLabel" type="Label" parent="HUD" unique_id=87802621]
-anchors_preset = -1
-anchor_left = 0.21800001
-anchor_top = 0.238
-anchor_right = 0.21800001
-anchor_bottom = 0.238
-offset_left = -110.13602
-offset_top = -17.223999
-offset_right = 109.86398
-offset_bottom = 16.776001
+offset_left = 55.0
+offset_top = 10.0
+offset_right = 250.0
+offset_bottom = 45.0
 theme_override_colors/font_color = Color(0.9098039, 0.7882353, 0.3019608, 1)
-theme_override_font_sizes/font_size = 24
-text = "set it to \"Shards: 0\""
+theme_override_font_sizes/font_size = 26
+text = "x 0"
+
+[node name="HealthLabel" type="Label" parent="HUD" unique_id=87802622]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -250.0
+offset_top = 10.0
+offset_right = -15.0
+offset_bottom = 45.0
+theme_override_colors/font_color = Color(0.4, 0.85, 0.9, 1)
+theme_override_font_sizes/font_size = 28
+text = "♦ ♦ ♦"
+horizontal_alignment = 2
 
 [node name="rock" parent="." unique_id=1149330400 instance=ExtResource("8_7eaep")]
 position = Vector2(435, 572)
@@ -130,4 +150,17 @@ position = Vector2(1760, 680)
 script = ExtResource("10_exit")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LevelExit" unique_id=1932664041]
+position = Vector2(0, -15.5)
 shape = SubResource("RectangleShape2D_exit")
+
+[node name="Sprite2D" type="Sprite2D" parent="LevelExit" unique_id=1394877158]
+position = Vector2(-6.0000277, -60.999992)
+scale = Vector2(0.16843835, 0.10947194)
+texture = ExtResource("9_jep2d")
+
+[node name="Music" type="AudioStreamPlayer" parent="." unique_id=1932664042]
+stream = ExtResource("11_music")
+volume_db = -6.0
+autoplay = true
+
+[node name="TouchControls" parent="." unique_id=1932664043 instance=ExtResource("0_touch")]

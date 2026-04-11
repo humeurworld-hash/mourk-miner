@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dv35dvk00m4r"
+path="res://.godot/imported/Mist in the Circuit.mp3-58c48bd838d3a32a64a10df750530ba1.mp3str"
+
+[deps]
+
+source_file="res://echoveil/music/Mist in the Circuit.mp3"
+dest_files=["res://.godot/imported/Mist in the Circuit.mp3-58c48bd838d3a32a64a10df750530ba1.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

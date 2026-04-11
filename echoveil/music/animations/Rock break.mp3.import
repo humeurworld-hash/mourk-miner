@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://c1ek7iictdqui"
+path="res://.godot/imported/Rock break.mp3-42495f748e3bf3a27fa93502d3ff28d2.mp3str"
+
+[deps]
+
+source_file="res://echoveil/music/animations/Rock break.mp3"
+dest_files=["res://.godot/imported/Rock break.mp3-42495f748e3bf3a27fa93502d3ff28d2.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

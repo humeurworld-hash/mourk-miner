@@ -6,13 +6,26 @@ const GRAVITY = 980.0
 const PICKAXE_RANGE = 60.0
 const PICKAXE_DAMAGE = 1
 
-var shards_collected: int = 0
 var can_swing: bool = true
 var facing_right: bool = true
 
 @onready var axe: Sprite2D = $Axe
+@onready var swing_sound: AudioStreamPlayer = AudioStreamPlayer.new()
 
 signal pickaxe_hit(hit_position: Vector2, direction: float)
+
+var shards_collected: int:
+	get: return GameState.shards_collected
+	set(v): GameState.shards_collected = v
+
+var health: int:
+	get: return GameState.health
+	set(v): GameState.health = v
+
+func _ready() -> void:
+	swing_sound.stream = load("res://echoveil/music/animations/axe swing.mp3")
+	swing_sound.volume_db = -15.0
+	add_child(swing_sound)
 
 func _physics_process(delta: float) -> void:
 	# GRAVITY
@@ -42,6 +55,8 @@ func swing_pickaxe() -> void:
 	can_swing = false
 
 	var swing_dir = 1.0 if facing_right else -1.0
+
+	swing_sound.play()
 
 	# Animate the axe: chop forward then return
 	var chop_rotation = 1.4 * swing_dir

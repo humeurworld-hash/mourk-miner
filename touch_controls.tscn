@@ -1,0 +1,69 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://touch_controls.gd" id="1_touch"]
+
+[node name="TouchControls" type="CanvasLayer"]
+layer = 10
+script = ExtResource("1_touch")
+
+[node name="LeftBtn" type="Button" parent="." unique_id=4000000001]
+anchor_left = 0.0
+anchor_top = 1.0
+anchor_right = 0.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = -140.0
+offset_right = 120.0
+offset_bottom = -20.0
+theme_override_font_sizes/font_size = 40
+text = "←"
+flat = false
+modulate = Color(1, 1, 1, 0.5)
+
+[node name="RightBtn" type="Button" parent="." unique_id=4000000002]
+anchor_left = 0.0
+anchor_top = 1.0
+anchor_right = 0.0
+anchor_bottom = 1.0
+offset_left = 140.0
+offset_top = -140.0
+offset_right = 240.0
+offset_bottom = -20.0
+theme_override_font_sizes/font_size = 40
+text = "→"
+modulate = Color(1, 1, 1, 0.5)
+
+[node name="JumpBtn" type="Button" parent="." unique_id=4000000003]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -240.0
+offset_top = -220.0
+offset_right = -140.0
+offset_bottom = -120.0
+theme_override_font_sizes/font_size = 40
+text = "↑"
+modulate = Color(1, 1, 1, 0.5)
+
+[node name="SwingBtn" type="Button" parent="." unique_id=4000000004]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -120.0
+offset_top = -140.0
+offset_right = -20.0
+offset_bottom = -20.0
+theme_override_font_sizes/font_size = 32
+text = "⚔"
+modulate = Color(1, 1, 1, 0.5)
+
+[connection signal="button_down" from="LeftBtn" to="." method="_on_left_down"]
+[connection signal="button_up" from="LeftBtn" to="." method="_on_left_up"]
+[connection signal="button_down" from="RightBtn" to="." method="_on_right_down"]
+[connection signal="button_up" from="RightBtn" to="." method="_on_right_up"]
+[connection signal="button_down" from="JumpBtn" to="." method="_on_jump_down"]
+[connection signal="button_up" from="JumpBtn" to="." method="_on_jump_up"]
+[connection signal="button_down" from="SwingBtn" to="." method="_on_swing_down"]
+[connection signal="button_up" from="SwingBtn" to="." method="_on_swing_up"]
