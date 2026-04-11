@@ -11,7 +11,8 @@ var facing_right: bool = true
 var can_break: bool = true
 
 @onready var axe: Sprite2D = $Axe
-@onready var body_sprite: Sprite2D = $Sprite2D
+@onready var body_sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var fuse_sprite: AnimatedSprite2D = $FuseSprite
 @onready var swing_sound: AudioStreamPlayer = AudioStreamPlayer.new()
 @onready var strike_sound: AudioStreamPlayer = AudioStreamPlayer.new()
 @onready var lightning_sound: AudioStreamPlayer = AudioStreamPlayer.new()
@@ -43,6 +44,9 @@ func _ready() -> void:
 	lightning_sound.volume_db = -5.0
 	add_child(lightning_sound)
 
+	body_sprite.play(&"idle")
+	fuse_sprite.play(&"idle")
+
 func _physics_process(delta: float) -> void:
 	# GRAVITY
 	if not is_on_floor():
@@ -58,10 +62,18 @@ func _physics_process(delta: float) -> void:
 		velocity.x = direction * SPEED
 		facing_right = direction > 0
 		body_sprite.flip_h = not facing_right
+		fuse_sprite.flip_h = not facing_right
 		axe.scale.x = 0.08 if facing_right else -0.08
 		axe.position.x = 60 if facing_right else -60
+		fuse_sprite.position.x = 40 if facing_right else -40
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED * 0.3)
+
+	# Animation state (don't override swing)
+	if can_swing:
+		var target = &"run" if direction else &"idle"
+		if body_sprite.animation != target:
+			body_sprite.play(target)
 
 	# PICKAXE SWING
 	if Input.is_action_just_pressed("swing") and can_swing:
@@ -79,6 +91,8 @@ func swing_pickaxe() -> void:
 	var swing_dir = 1.0 if facing_right else -1.0
 
 	swing_sound.play()
+	body_sprite.play(&"swing")
+	fuse_sprite.play(&"react")
 
 	# Animate the axe: chop forward then return
 	var chop_rotation = 1.4 * swing_dir
@@ -104,28 +118,30 @@ func swing_pickaxe() -> void:
 		if body.has_method("take_damage"):
 			body.take_damage(PICKAXE_DAMAGE)
 
-	# Cooldown timer
+	# Cooldown then restore idle/run
 	await get_tree().create_timer(0.3).timeout
 	can_swing = true
+	fuse_sprite.play(&"idle")
+	var resume = &"run" if abs(velocity.x) > 10 else &"idle"
+	body_sprite.play(resume)
 
 func _lightning_strike() -> void:
 	can_break = false
 	GameState.lives = 0
 
 	lightning_sound.play()
+	fuse_sprite.play(&"react")
 
 	# Lightning image + screen flash overlay
 	var flash_layer = CanvasLayer.new()
 	flash_layer.layer = 30
 	get_parent().add_child(flash_layer)
 
-	# Background flash
 	var flash = ColorRect.new()
 	flash.color = Color(0.9, 0.0, 1.0, 0.45)
 	flash.set_anchors_preset(Control.PRESET_FULL_RECT)
 	flash_layer.add_child(flash)
 
-	# Lightning sprite centered on screen
 	var bolt = Sprite2D.new()
 	bolt.texture = load("res://echoveil/Animations/axe lightning.png")
 	bolt.position = flash_layer.get_viewport().get_visible_rect().size * 0.5
@@ -133,7 +149,6 @@ func _lightning_strike() -> void:
 	bolt.modulate = Color(1.0, 0.5, 1.0, 1.0)
 	flash_layer.add_child(bolt)
 
-	# Fade out both
 	var tween = create_tween()
 	tween.set_parallel(true)
 	tween.tween_property(flash, "color", Color(0.9, 0.0, 1.0, 0.0), 0.6)
@@ -146,4 +161,5 @@ func _lightning_strike() -> void:
 			drone.stun(4.0)
 
 	await get_tree().create_timer(1.0).timeout
+	fuse_sprite.play(&"idle")
 	can_break = true

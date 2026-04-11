@@ -62,7 +62,7 @@ func take_damage(_amount: int) -> void:
 	tween.tween_property(self, "modulate", Color(1, 1, 1, 1), 0.07)
 
 func _flash_player(player: Node) -> void:
-	if player.has_node("Sprite2D"):
+	if player.has_node("AnimatedSprite2D"):
 		var tween = create_tween()
-		tween.tween_property(player.get_node("Sprite2D"), "modulate", Color(1, 0.2, 0.2, 1), 0.1)
-		tween.tween_property(player.get_node("Sprite2D"), "modulate", Color(1, 1, 1, 1), 0.2)
+		tween.tween_property(player.get_node("AnimatedSprite2D"), "modulate", Color(1, 0.2, 0.2, 1), 0.1)
+		tween.tween_property(player.get_node("AnimatedSprite2D"), "modulate", Color(1, 1, 1, 1), 0.2)
