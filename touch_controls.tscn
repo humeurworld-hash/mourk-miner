@@ -67,3 +67,19 @@ modulate = Color(1, 1, 1, 0.5)
 [connection signal="button_up" from="JumpBtn" to="." method="_on_jump_up"]
 [connection signal="button_down" from="SwingBtn" to="." method="_on_swing_down"]
 [connection signal="button_up" from="SwingBtn" to="." method="_on_swing_up"]
+
+[node name="BreakBtn" type="Button" parent="." unique_id=4000000005]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -360.0
+offset_top = -220.0
+offset_right = -260.0
+offset_bottom = -120.0
+theme_override_font_sizes/font_size = 26
+text = "⚡"
+modulate = Color(0.9, 0.0, 1.0, 0.5)
+
+[connection signal="button_down" from="BreakBtn" to="." method="_on_break_down"]
+[connection signal="button_up" from="BreakBtn" to="." method="_on_break_up"]

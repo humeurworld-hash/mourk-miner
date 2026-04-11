@@ -13,6 +13,7 @@
 [ext_resource type="AudioStream" uid="uid://wjgw140fk230" path="res://echoveil/music/Mist in the Circuit-2.mp3" id="11_music"]
 [ext_resource type="Texture2D" uid="uid://chks8f75txysc" path="res://echoveil/platforms/Rocks/26BD4AED-AB96-4AD0-B798-DAE0D240A86D 2.png" id="12_shardicon"]
 [ext_resource type="PackedScene" path="res://drone.tscn" id="13_drone"]
+[ext_resource type="PackedScene" path="res://special_rock.tscn" id="14_sr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e2o6t"]
 size = Vector2(114, 122)
@@ -135,6 +136,18 @@ theme_override_font_sizes/font_size = 28
 text = "♦ ♦ ♦"
 horizontal_alignment = 2
 
+[node name="LivesLabel" type="Label" parent="HUD" unique_id=87802623]
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -250.0
+offset_top = 48.0
+offset_right = -15.0
+offset_bottom = 80.0
+theme_override_colors/font_color = Color(0.9, 0.3, 1.0, 1)
+theme_override_font_sizes/font_size = 22
+text = ""
+horizontal_alignment = 2
+
 [node name="rock" parent="." unique_id=1149330400 instance=ExtResource("8_7eaep")]
 position = Vector2(435, 572)
 
@@ -147,7 +160,7 @@ position = Vector2(980, 572)
 [node name="rock4" parent="." unique_id=1932664038 instance=ExtResource("8_7eaep")]
 position = Vector2(1250, 572)
 
-[node name="rock5" parent="." unique_id=1932664039 instance=ExtResource("8_7eaep")]
+[node name="rock5" parent="." unique_id=1932664039 instance=ExtResource("14_sr")]
 position = Vector2(1550, 572)
 
 [node name="rock6" parent="." unique_id=1932664044 instance=ExtResource("8_7eaep")]

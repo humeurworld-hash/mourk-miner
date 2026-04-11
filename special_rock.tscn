@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://special_rock_sc"]
+
+[ext_resource type="Script" path="res://special_rock.gd" id="1_sr"]
+[ext_resource type="Texture2D" uid="uid://j6pkrhwqaemw" path="res://echoveil/platforms/Rocks/26BD4AED-AB96-4AD0-B798-DAE0D240A86D.png" id="2_sr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sr"]
+size = Vector2(108, 96)
+
+[node name="special_rock" type="StaticBody2D" unique_id=5100000001]
+collision_layer = 2
+script = ExtResource("1_sr")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=5100000002]
+position = Vector2(-0.50000477, 0.5000036)
+scale = Vector2(0.41796875, 0.47029707)
+texture = ExtResource("2_sr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=5100000003]
+shape = SubResource("RectangleShape2D_sr")

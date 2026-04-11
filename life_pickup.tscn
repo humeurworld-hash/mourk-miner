@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://life_pickup_sc"]
+
+[ext_resource type="Script" path="res://life_pickup.gd" id="1_lp"]
+[ext_resource type="Texture2D" uid="uid://chks8f75txysc" path="res://echoveil/platforms/Rocks/26BD4AED-AB96-4AD0-B798-DAE0D240A86D 2.png" id="2_lp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lp"]
+size = Vector2(40, 32)
+
+[node name="life_pickup" type="Area2D" unique_id=5000000001]
+collision_layer = 8
+script = ExtResource("1_lp")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=5000000002]
+scale = Vector2(0.05, 0.05)
+modulate = Color(1.2, 0.0, 1.2, 1)
+texture = ExtResource("2_lp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=5000000003]
+shape = SubResource("RectangleShape2D_lp")

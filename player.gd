@@ -8,6 +8,7 @@ const PICKAXE_DAMAGE = 1
 
 var can_swing: bool = true
 var facing_right: bool = true
+var can_break: bool = true
 
 @onready var axe: Sprite2D = $Axe
 @onready var body_sprite: Sprite2D = $Sprite2D
@@ -22,6 +23,10 @@ var shards_collected: int:
 var health: int:
 	get: return GameState.health
 	set(v): GameState.health = v
+
+var lives: int:
+	get: return GameState.lives
+	set(v): GameState.lives = v
 
 func _ready() -> void:
 	swing_sound.stream = load("res://echoveil/music/animations/axe swing.mp3")
@@ -51,6 +56,10 @@ func _physics_process(delta: float) -> void:
 	# PICKAXE SWING
 	if Input.is_action_just_pressed("swing") and can_swing:
 		swing_pickaxe()
+
+	# BREAK / LIGHTNING STRIKE
+	if Input.is_action_just_pressed("break_power") and GameState.lives >= 5 and can_break:
+		_lightning_strike()
 
 	move_and_slide()
 
@@ -85,3 +94,28 @@ func swing_pickaxe() -> void:
 	# Cooldown timer
 	await get_tree().create_timer(0.3).timeout
 	can_swing = true
+
+func _lightning_strike() -> void:
+	can_break = false
+	GameState.lives = 0
+
+	# Screen flash
+	var flash = ColorRect.new()
+	flash.color = Color(0.9, 0.0, 1.0, 0.55)
+	flash.set_anchors_preset(Control.PRESET_FULL_RECT)
+	var flash_layer = CanvasLayer.new()
+	flash_layer.layer = 30
+	get_parent().add_child(flash_layer)
+	flash_layer.add_child(flash)
+
+	var tween = create_tween()
+	tween.tween_property(flash, "color", Color(0.9, 0.0, 1.0, 0.0), 0.5)
+	tween.tween_callback(flash_layer.queue_free)
+
+	# Stun all drones
+	for drone in get_tree().get_nodes_in_group("drone"):
+		if drone.has_method("stun"):
+			drone.stun(4.0)
+
+	await get_tree().create_timer(1.0).timeout
+	can_break = true

@@ -2,12 +2,14 @@ extends Node
 
 var shards_collected: int = 0
 var health: int = 3
+var lives: int = 0
 const SAVE_PATH = "user://mourk_save.json"
 
 func save() -> void:
 	var data = {
 		"shards": shards_collected,
-		"health": health
+		"health": health,
+		"lives": lives
 	}
 	var file = FileAccess.open(SAVE_PATH, FileAccess.WRITE)
 	if file:
@@ -22,7 +24,9 @@ func load_data() -> void:
 		if data is Dictionary:
 			shards_collected = data.get("shards", 0)
 			health = data.get("health", 3)
+			lives = data.get("lives", 0)
 
 func reset() -> void:
 	shards_collected = 0
 	health = 3
+	lives = 0
