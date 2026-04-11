@@ -56,10 +56,9 @@ func stun(duration: float) -> void:
 	tween.tween_property(self, "modulate", Color(0.6, 0.8, 1.0, 0.4), 0.15)
 
 func take_damage(_amount: int) -> void:
-	# Drones are immune to axe — show immune flash
-	var tween = create_tween()
-	tween.tween_property(self, "modulate", Color(1, 1, 0.2, 1), 0.07)
-	tween.tween_property(self, "modulate", Color(1, 1, 1, 1), 0.07)
+	# Axe briefly stuns the drone (doesn't kill it)
+	if not stunned:
+		stun(1.5)
 
 func _flash_player(player: Node) -> void:
 	if player.has_node("AnimatedSprite2D"):

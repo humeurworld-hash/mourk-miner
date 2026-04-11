@@ -17,7 +17,6 @@ var can_break: bool = true
 @onready var strike_sound: AudioStreamPlayer = AudioStreamPlayer.new()
 @onready var lightning_sound: AudioStreamPlayer = AudioStreamPlayer.new()
 
-signal pickaxe_hit(hit_position: Vector2, direction: float)
 
 var shards_collected: int:
 	get: return GameState.shards_collected
@@ -80,7 +79,7 @@ func _physics_process(delta: float) -> void:
 		swing_pickaxe()
 
 	# BREAK / LIGHTNING STRIKE
-	if Input.is_action_just_pressed("break_power") and GameState.lives >= 5 and can_break:
+	if Input.is_action_just_pressed("break_power") and GameState.lives >= 3 and can_break:
 		_lightning_strike()
 
 	move_and_slide()

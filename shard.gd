@@ -14,9 +14,9 @@ func _process(delta: float) -> void:
 
 func _on_body_entered(body: Node2D) -> void:
 	if body.name == "Player":
-		_fly_to_counter(body)
+		_fly_to_counter()
 
-func _fly_to_counter(body: Node2D) -> void:
+func _fly_to_counter() -> void:
 	# Capture before freeing
 	var screen_pos = get_viewport().get_canvas_transform() * global_position
 	var texture = $Sprite2D.texture

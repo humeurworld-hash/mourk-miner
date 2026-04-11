@@ -15,7 +15,7 @@ func _process(_delta: float) -> void:
 
 	# Lives display + Break indicator
 	var lives = GameState.lives
-	if lives >= 5:
+	if lives >= 3:
 		$LivesLabel.text = "♦ BREAK"
 		$LivesLabel.add_theme_color_override("font_color", Color(1.0, 0.0, 1.0, 1.0))
 	else:

@@ -157,7 +157,7 @@ position = Vector2(330, 561)
 [node name="rock2" parent="." unique_id=3000000019 instance=ExtResource("7_l2rock")]
 position = Vector2(440, 561)
 
-[node name="rock3" parent="." unique_id=3000000020 instance=ExtResource("7_l2rock")]
+[node name="rock3" parent="." unique_id=3000000020 instance=ExtResource("15_l2sr")]
 position = Vector2(650, 432)
 
 [node name="rock4" parent="." unique_id=3000000021 instance=ExtResource("7_l2rock")]

@@ -13,7 +13,7 @@ func _process(delta: float) -> void:
 	position.y = start_y + sin(bob_offset) * 4.0
 
 func _on_body_entered(body: Node2D) -> void:
-	if body.name == "Player" and GameState.lives < 5:
+	if body.name == "Player" and GameState.lives < 3:
 		_fly_to_hud()
 	elif body.name == "Player":
 		queue_free()
@@ -46,6 +46,6 @@ func _fly_to_hud() -> void:
 	tween.tween_property(sprite, "position", target, 0.35).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
 	tween.tween_property(sprite, "scale", Vector2(0.008, 0.008), 0.35).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
 	tween.chain().tween_callback(func():
-		GameState.lives = min(5, GameState.lives + 1)
+		GameState.lives = min(3, GameState.lives + 1)
 		anim_layer.queue_free()
 	)
