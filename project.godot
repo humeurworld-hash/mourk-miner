@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Mourk miner"
-run/main_scene="uid://c8jg0esi0lj8"
+run/main_scene="uid://b0uuaa3shw8mu"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
 

@@ -1,0 +1,119 @@
+[gd_scene format=3]
+
+[ext_resource type="Texture2D" uid="uid://6r3wvh6f772y" path="res://echoveil/backgrounds/farback.PNG" id="1_l2far"]
+[ext_resource type="Texture2D" uid="uid://babv60bw0cyec" path="res://echoveil/backgrounds/foreground.png" id="2_l2near"]
+[ext_resource type="Script" uid="uid://dp6vls7m6rpgi" path="res://player.gd" id="3_l2player"]
+[ext_resource type="Texture2D" uid="uid://caqlyshv6hael" path="res://echoveil/forme/Remove background project 2.PNG" id="4_l2sprite"]
+[ext_resource type="Texture2D" path="res://echoveil/forme/Glowing fantasy battle axe design.png" id="5_l2axe"]
+[ext_resource type="Script" uid="uid://uewak7cunake" path="res://hud.gd" id="6_l2hud"]
+[ext_resource type="PackedScene" uid="uid://cvkjl5w0rnr51" path="res://rock.tscn" id="7_l2rock"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l2body"]
+size = Vector2(114, 122)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l2axe"]
+size = Vector2(54.5, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l2floor"]
+size = Vector2(2400, 20)
+
+[node name="Level2" type="Node2D" unique_id=3000000001]
+
+[node name="background" type="Parallax2D" parent="." unique_id=3000000002]
+
+[node name="farlayer" type="ParallaxLayer" parent="background" unique_id=3000000003]
+motion_scale = Vector2(0.2, 0.2)
+
+[node name="Sprite2D" type="Sprite2D" parent="background/farlayer" unique_id=3000000004]
+position = Vector2(525, 362)
+modulate = Color(0.4, 0.3, 0.6, 1)
+texture = ExtResource("1_l2far")
+
+[node name="Sprite2D2" type="Sprite2D" parent="background/farlayer" unique_id=3000000005]
+position = Vector2(1789, 362)
+modulate = Color(0.4, 0.3, 0.6, 1)
+texture = ExtResource("1_l2far")
+
+[node name="nearlayer" type="ParallaxLayer" parent="background" unique_id=3000000006]
+position = Vector2(46, 521)
+
+[node name="Sprite2D" type="Sprite2D" parent="background/nearlayer" unique_id=3000000007]
+position = Vector2(478.9976, 53)
+scale = Vector2(1.0000038, 0.9114)
+modulate = Color(0.5, 0.4, 0.7, 1)
+texture = ExtResource("2_l2near")
+
+[node name="Player" type="CharacterBody2D" parent="." unique_id=3000000008]
+position = Vector2(200, 100)
+script = ExtResource("3_l2player")
+groups = ["player"]
+
+[node name="Sprite2D" type="Sprite2D" parent="Player" unique_id=3000000009]
+position = Vector2(3, 227)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("4_l2sprite")
+
+[node name="Axe" type="Sprite2D" parent="Player" unique_id=3000000010]
+position = Vector2(60, 220)
+scale = Vector2(0.08, 0.08)
+texture = ExtResource("5_l2axe")
+
+[node name="forme" type="CollisionShape2D" parent="Player" unique_id=3000000011]
+position = Vector2(3, 227)
+shape = SubResource("RectangleShape2D_l2body")
+
+[node name="PickaxeHitbox" type="Area2D" parent="Player" unique_id=3000000012]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/PickaxeHitbox" unique_id=3000000013]
+position = Vector2(97.25, 227)
+shape = SubResource("RectangleShape2D_l2axe")
+
+[node name="Camera2D" type="Camera2D" parent="Player" unique_id=3000000014]
+position = Vector2(0, 182)
+
+[node name="RayCast2D" type="RayCast2D" parent="Player" unique_id=3000000015]
+position = Vector2(75, 253)
+target_position = Vector2(50, 0)
+collision_mask = 2
+collide_with_areas = true
+
+[node name="Floor" type="StaticBody2D" parent="." unique_id=3000000016]
+position = Vector2(576, 619)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor" unique_id=3000000017]
+shape = SubResource("RectangleShape2D_l2floor")
+
+[node name="rock" parent="." unique_id=3000000018 instance=ExtResource("7_l2rock")]
+position = Vector2(350, 572)
+
+[node name="rock2" parent="." unique_id=3000000019 instance=ExtResource("7_l2rock")]
+position = Vector2(600, 572)
+
+[node name="rock3" parent="." unique_id=3000000020 instance=ExtResource("7_l2rock")]
+position = Vector2(850, 572)
+
+[node name="rock4" parent="." unique_id=3000000021 instance=ExtResource("7_l2rock")]
+position = Vector2(1100, 572)
+
+[node name="rock5" parent="." unique_id=3000000022 instance=ExtResource("7_l2rock")]
+position = Vector2(1350, 572)
+
+[node name="rock6" parent="." unique_id=3000000023 instance=ExtResource("7_l2rock")]
+position = Vector2(1600, 572)
+
+[node name="HUD" type="CanvasLayer" parent="." unique_id=3000000024]
+script = ExtResource("6_l2hud")
+
+[node name="ShardLabel" type="Label" parent="HUD" unique_id=3000000025]
+anchors_preset = -1
+anchor_left = 0.21800001
+anchor_top = 0.238
+anchor_right = 0.21800001
+anchor_bottom = 0.238
+offset_left = -110.13602
+offset_top = -17.223999
+offset_right = 109.86398
+offset_bottom = 16.776001
+theme_override_colors/font_color = Color(0.9098039, 0.7882353, 0.3019608, 1)
+theme_override_font_sizes/font_size = 24
+text = "Shards: 0"

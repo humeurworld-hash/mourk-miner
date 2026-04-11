@@ -1,13 +1,13 @@
-[gd_scene format=3 uid="uid://c8jg0esi0lj8"]
+[gd_scene format=3 uid="uid://dlrfyu023dcks"]
 
-[ext_resource type="Texture2D" uid="uid://6r3wvh6f772y" path="res://echoveil/backgrounds/farback.PNG" id="1_7jktm"]
-[ext_resource type="Script" uid="uid://dp6vls7m6rpgi" path="res://player.gd" id="1_e2o6t"]
-[ext_resource type="Texture2D" uid="uid://bbh5g5t1tuufb" path="res://echoveil/backgrounds/IMG_2812.png" id="2_ryrav"]
-[ext_resource type="Texture2D" uid="uid://babv60bw0cyec" path="res://echoveil/backgrounds/foreground.png" id="3_eow3j"]
-[ext_resource type="Texture2D" uid="uid://caqlyshv6hael" path="res://echoveil/forme/Remove background project 2.PNG" id="5_ryrav"]
-[ext_resource type="Texture2D" uid="uid://cw1wyoi6ixc0a" path="res://echoveil/platforms/IMG_2812 2.png" id="6_ryrav"]
-[ext_resource type="Texture2D" uid="uid://j6pkrhwqaemw" path="res://echoveil/platforms/Rocks/26BD4AED-AB96-4AD0-B798-DAE0D240A86D.png" id="7_eow3j"]
-[ext_resource type="Script" uid="uid://bblbruetk7rb7" path="res://rock.gd" id="8_rockgd"]
+[ext_resource type="Texture2D" uid="uid://6r3wvh6f772y" path="res://echoveil/backgrounds/farback.PNG" id="1_vyaop"]
+[ext_resource type="Texture2D" uid="uid://bbh5g5t1tuufb" path="res://echoveil/backgrounds/IMG_2812.png" id="2_nr0jt"]
+[ext_resource type="Texture2D" uid="uid://babv60bw0cyec" path="res://echoveil/backgrounds/foreground.png" id="3_e1yss"]
+[ext_resource type="Script" uid="uid://dp6vls7m6rpgi" path="res://player.gd" id="4_dyx5a"]
+[ext_resource type="Texture2D" uid="uid://caqlyshv6hael" path="res://echoveil/forme/Remove background project 2.PNG" id="5_nh0os"]
+[ext_resource type="Texture2D" uid="uid://cw1wyoi6ixc0a" path="res://echoveil/platforms/IMG_2812 2.png" id="6_hhf6d"]
+[ext_resource type="Script" uid="uid://uewak7cunake" path="res://hud.gd" id="7_d1wkb"]
+[ext_resource type="PackedScene" uid="uid://cvkjl5w0rnr51" path="res://rock.tscn" id="8_wrriy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e2o6t"]
 size = Vector2(114, 122)
@@ -19,10 +19,7 @@ size = Vector2(54.5, 20)
 size = Vector2(2000, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7jktm"]
-size = Vector2(150, 13.875)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_vef74"]
-size = Vector2(77, 74)
+size = Vector2(151, 13.875)
 
 [node name="Game" type="Node2D" unique_id=1161058939]
 
@@ -32,35 +29,34 @@ size = Vector2(77, 74)
 motion_scale = Vector2(0.2, 0.2)
 
 [node name="Sprite2D" type="Sprite2D" parent="background/farlayer" unique_id=258002562]
-position = Vector2(576, 324)
-scale = Vector2(0.9114, 0.9114)
-texture = ExtResource("1_7jktm")
+position = Vector2(525, 362)
+texture = ExtResource("1_vyaop")
 
 [node name="midlayer" type="ParallaxLayer" parent="background" unique_id=89577513]
+position = Vector2(558, 302)
 motion_scale = Vector2(0.5, 0.5)
 
 [node name="Sprite2D" type="Sprite2D" parent="background/midlayer" unique_id=1687709534]
-position = Vector2(576, 324)
-scale = Vector2(1.1058, 1.1058)
-texture = ExtResource("2_ryrav")
+position = Vector2(-27.75, 114)
+scale = Vector2(1.0372036, 1)
+texture = ExtResource("2_nr0jt")
 
 [node name="nearlayer" type="ParallaxLayer" parent="background" unique_id=1278689398]
-motion_scale = Vector2(0.8, 0.8)
+position = Vector2(46, 521)
+motion_scale = Vector2(0.8, 1)
 
 [node name="Sprite2D" type="Sprite2D" parent="background/nearlayer" unique_id=1231864662]
-position = Vector2(576, 600)
-scale = Vector2(0.9114, 0.9114)
-texture = ExtResource("3_eow3j")
+position = Vector2(482, 231)
+texture = ExtResource("3_e1yss")
 
-[node name="Player" type="CharacterBody2D" parent="." unique_id=1770645815]
-position = Vector2(200, 100)
-script = ExtResource("1_e2o6t")
-groups = ["player"]
+[node name="Player" type="CharacterBody2D" parent="." unique_id=1770645815 groups=["player"]]
+position = Vector2(200, 300)
+script = ExtResource("4_dyx5a")
 
 [node name="Sprite2D" type="Sprite2D" parent="Player" unique_id=1840483865]
 position = Vector2(3, 227)
 scale = Vector2(0.15, 0.15)
-texture = ExtResource("5_ryrav")
+texture = ExtResource("5_nh0os")
 
 [node name="forme" type="CollisionShape2D" parent="Player" unique_id=629588132]
 position = Vector2(3, 227)
@@ -72,17 +68,20 @@ shape = SubResource("RectangleShape2D_e2o6t")
 position = Vector2(97.25, -1)
 shape = SubResource("RectangleShape2D_eow3j")
 
-[node name="Camera2D" type="Camera2D" parent="Player" unique_id=111111111]
+[node name="Camera2D" type="Camera2D" parent="Player" unique_id=222222222]
 position = Vector2(0, 227)
 
 [node name="RayCast2D" type="RayCast2D" parent="Player" unique_id=1053819659]
-position = Vector2(79, 229)
+position = Vector2(75, 253)
 target_position = Vector2(50, 0)
+collision_mask = 2
+collide_with_areas = true
 
 [node name="Floor" type="StaticBody2D" parent="." unique_id=2012210779]
-position = Vector2(576, 570)
+position = Vector2(576, 580)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Floor" unique_id=472077029]
+position = Vector2(17, -75)
 shape = SubResource("RectangleShape2D_feb5d")
 
 [node name="platform 2" type="StaticBody2D" parent="." unique_id=1167628008]
@@ -94,10 +93,10 @@ shape = SubResource("RectangleShape2D_7jktm")
 [node name="Sprite2D2" type="Sprite2D" parent="platform 2" unique_id=228289035]
 position = Vector2(-3, 0)
 scale = Vector2(0.22403921, 0.08593709)
-texture = ExtResource("6_ryrav")
+texture = ExtResource("6_hhf6d")
 
 [node name="platform 3" type="StaticBody2D" parent="." unique_id=1766755124]
-position = Vector2(917, 403)
+position = Vector2(917.5, 403)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="platform 3" unique_id=1879749594]
 shape = SubResource("RectangleShape2D_7jktm")
@@ -105,7 +104,7 @@ shape = SubResource("RectangleShape2D_7jktm")
 [node name="Sprite2D2" type="Sprite2D" parent="platform 3" unique_id=1643722700]
 position = Vector2(-4, -0.5)
 scale = Vector2(0.22403921, 0.18941985)
-texture = ExtResource("6_ryrav")
+texture = ExtResource("6_hhf6d")
 
 [node name="platform 4" type="StaticBody2D" parent="." unique_id=713603893]
 position = Vector2(736, 447)
@@ -116,22 +115,27 @@ shape = SubResource("RectangleShape2D_7jktm")
 [node name="Sprite2D2" type="Sprite2D" parent="platform 4" unique_id=1509945042]
 position = Vector2(-5, -4)
 scale = Vector2(0.22403921, 0.18941985)
-texture = ExtResource("6_ryrav")
+texture = ExtResource("6_hhf6d")
 
-[ext_resource type="PackedScene" path="res://hole.tscn" id="9_hole"]
+[node name="HUD" type="CanvasLayer" parent="." unique_id=1395744975]
+script = ExtResource("7_d1wkb")
 
-[node name="LevelHole" parent="." instance=ExtResource("9_hole")]
-position = Vector2(1100, 570)
+[node name="ShardLabel" type="Label" parent="HUD" unique_id=87802621]
+anchors_preset = -1
+anchor_left = 0.21800001
+anchor_top = 0.238
+anchor_right = 0.21800001
+anchor_bottom = 0.238
+offset_left = -110.13602
+offset_top = -17.223999
+offset_right = 109.86398
+offset_bottom = 16.776001
+theme_override_colors/font_color = Color(0.9098039, 0.7882353, 0.3019608, 1)
+theme_override_font_sizes/font_size = 24
+text = "set it to \"Shards: 0\""
 
-[node name="VergeRock" type="StaticBody2D" parent="." unique_id=517719514]
-position = Vector2(447, 523)
-collision_layer = 2
-script = ExtResource("8_rockgd")
+[node name="rock" parent="." unique_id=1149330400 instance=ExtResource("8_wrriy")]
+position = Vector2(451, 545)
 
-[node name="Sprite2D" type="Sprite2D" parent="VergeRock" unique_id=901743995]
-scale = Vector2(0.296875, 0.35643575)
-texture = ExtResource("7_eow3j")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="VergeRock" unique_id=1025363093]
-position = Vector2(0.5, 0)
-shape = SubResource("RectangleShape2D_vef74")
+[node name="rock2" parent="." unique_id=1932664036 instance=ExtResource("8_wrriy")]
+position = Vector2(759, 381)

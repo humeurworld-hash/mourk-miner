@@ -1,13 +1,13 @@
 [gd_scene format=3 uid="uid://b0uuaa3shw8mu"]
 
 [ext_resource type="Texture2D" uid="uid://6r3wvh6f772y" path="res://echoveil/backgrounds/farback.PNG" id="1_05srh"]
-[ext_resource type="Texture2D" uid="uid://bbh5g5t1tuufb" path="res://echoveil/backgrounds/IMG_2812.png" id="2_7eaep"]
 [ext_resource type="Texture2D" uid="uid://babv60bw0cyec" path="res://echoveil/backgrounds/foreground.png" id="3_xu2g3"]
 [ext_resource type="Script" uid="uid://dp6vls7m6rpgi" path="res://player.gd" id="4_jep2d"]
 [ext_resource type="Texture2D" uid="uid://caqlyshv6hael" path="res://echoveil/forme/Remove background project 2.PNG" id="5_hirbh"]
-[ext_resource type="Texture2D" uid="uid://cw1wyoi6ixc0a" path="res://echoveil/platforms/IMG_2812 2.png" id="6_cxqmh"]
 [ext_resource type="Script" uid="uid://uewak7cunake" path="res://hud.gd" id="7_05srh"]
 [ext_resource type="PackedScene" uid="uid://cvkjl5w0rnr51" path="res://rock.tscn" id="8_7eaep"]
+[ext_resource type="Texture2D" path="res://echoveil/forme/Glowing fantasy battle axe design.png" id="9_axe"]
+[ext_resource type="Script" path="res://level_exit.gd" id="10_exit"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e2o6t"]
 size = Vector2(114, 122)
@@ -15,11 +15,14 @@ size = Vector2(114, 122)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_eow3j"]
 size = Vector2(54.5, 20)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_feb5d"]
-size = Vector2(2000, 20)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_leftfloor"]
+size = Vector2(1900, 20)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_7jktm"]
-size = Vector2(151, 13.875)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rightfloor"]
+size = Vector2(180, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_exit"]
+size = Vector2(120, 100)
 
 [node name="Game" type="Node2D" unique_id=1161058939]
 
@@ -32,24 +35,19 @@ motion_scale = Vector2(0.2, 0.2)
 position = Vector2(525, 362)
 texture = ExtResource("1_05srh")
 
-[node name="midlayer" type="ParallaxLayer" parent="background" unique_id=89577513]
-position = Vector2(558, 302)
-motion_scale = Vector2(0.5, 0.5)
-
-[node name="Sprite2D" type="Sprite2D" parent="background/midlayer" unique_id=1687709534]
-position = Vector2(-27.75, 114)
-scale = Vector2(1.0372036, 1)
-texture = ExtResource("2_7eaep")
+[node name="Sprite2D2" type="Sprite2D" parent="background/farlayer" unique_id=258002563]
+position = Vector2(1789, 362)
+texture = ExtResource("1_05srh")
 
 [node name="nearlayer" type="ParallaxLayer" parent="background" unique_id=1278689398]
 position = Vector2(46, 521)
-motion_scale = Vector2(0.8, 0.8)
 
 [node name="Sprite2D" type="Sprite2D" parent="background/nearlayer" unique_id=1231864662]
-position = Vector2(482, 68)
+position = Vector2(478.9976, 53)
+scale = Vector2(1.0000038, 0.9114)
 texture = ExtResource("3_xu2g3")
 
-[node name="Player" type="CharacterBody2D" parent="." unique_id=1770645815 groups=["Player"]]
+[node name="Player" type="CharacterBody2D" parent="." unique_id=1770645815 groups=["player"]]
 position = Vector2(200, 300)
 script = ExtResource("4_jep2d")
 
@@ -58,16 +56,23 @@ position = Vector2(3, 227)
 scale = Vector2(0.15, 0.15)
 texture = ExtResource("5_hirbh")
 
+[node name="Axe" type="Sprite2D" parent="Player" unique_id=333333333]
+position = Vector2(60, 220)
+scale = Vector2(0.08, 0.08)
+texture = ExtResource("9_axe")
+
 [node name="forme" type="CollisionShape2D" parent="Player" unique_id=629588132]
 position = Vector2(3, 227)
 shape = SubResource("RectangleShape2D_e2o6t")
 
-[node name="PickaxeHitbox" type="Area2D" parent="Player/forme" unique_id=2014489598]
-collision_layer = 2
+[node name="PickaxeHitbox" type="Area2D" parent="Player" unique_id=2014489598]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/forme/PickaxeHitbox" unique_id=1256773888]
-position = Vector2(95, 23)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/PickaxeHitbox" unique_id=1256773888]
+position = Vector2(97.25, 227)
 shape = SubResource("RectangleShape2D_eow3j")
+
+[node name="Camera2D" type="Camera2D" parent="Player" unique_id=222222222]
+position = Vector2(0, 182)
 
 [node name="RayCast2D" type="RayCast2D" parent="Player" unique_id=1053819659]
 position = Vector2(75, 253)
@@ -75,60 +80,54 @@ target_position = Vector2(50, 0)
 collision_mask = 2
 collide_with_areas = true
 
-[node name="Floor" type="StaticBody2D" parent="." unique_id=2012210779]
-position = Vector2(576, 580)
+[node name="FloorLeft" type="StaticBody2D" parent="." unique_id=2012210779]
+position = Vector2(750, 619)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor" unique_id=472077029]
-position = Vector2(3, 39)
-shape = SubResource("RectangleShape2D_feb5d")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FloorLeft" unique_id=472077029]
+shape = SubResource("RectangleShape2D_leftfloor")
 
-[node name="platform 2" type="StaticBody2D" parent="." unique_id=1167628008]
+[node name="FloorRight" type="StaticBody2D" parent="." unique_id=2012210780]
+position = Vector2(1910, 619)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="platform 2" unique_id=1220847810]
-position = Vector2(569, 489.0625)
-shape = SubResource("RectangleShape2D_7jktm")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FloorRight" unique_id=472077030]
+shape = SubResource("RectangleShape2D_rightfloor")
 
-[node name="Sprite2D2" type="Sprite2D" parent="platform 2/CollisionShape2D" unique_id=228289035]
-position = Vector2(-2.9999855, 1.4841557e-05)
-scale = Vector2(0.22403921, 0.08593709)
-texture = ExtResource("6_cxqmh")
-
-[node name="platform 3" type="StaticBody2D" parent="." unique_id=1766755124]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="platform 3" unique_id=1879749594]
-position = Vector2(917.5, 403)
-shape = SubResource("RectangleShape2D_7jktm")
-
-[node name="Sprite2D2" type="Sprite2D" parent="platform 3/CollisionShape2D" unique_id=1643722700]
-position = Vector2(-4.000001, -0.5000035)
-scale = Vector2(0.22403921, 0.18941985)
-texture = ExtResource("6_cxqmh")
-
-[node name="platform 4" type="StaticBody2D" parent="." unique_id=713603893]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="platform 4" unique_id=1143967021]
-position = Vector2(736, 447)
-shape = SubResource("RectangleShape2D_7jktm")
-
-[node name="Sprite2D2" type="Sprite2D" parent="platform 4/CollisionShape2D" unique_id=1509945042]
-position = Vector2(-5, -4.000004)
-scale = Vector2(0.22403921, 0.18941985)
-texture = ExtResource("6_cxqmh")
 
 [node name="HUD" type="CanvasLayer" parent="." unique_id=1395744975]
 script = ExtResource("7_05srh")
 
-[node name="shard label" type="Label" parent="HUD" unique_id=87802621]
-offset_left = 20.0
-offset_top = 20.0
-offset_right = 168.0
-offset_bottom = 43.0
+[node name="ShardLabel" type="Label" parent="HUD" unique_id=87802621]
+anchors_preset = -1
+anchor_left = 0.21800001
+anchor_top = 0.238
+anchor_right = 0.21800001
+anchor_bottom = 0.238
+offset_left = -110.13602
+offset_top = -17.223999
+offset_right = 109.86398
+offset_bottom = 16.776001
 theme_override_colors/font_color = Color(0.9098039, 0.7882353, 0.3019608, 1)
 theme_override_font_sizes/font_size = 24
 text = "set it to \"Shards: 0\""
 
 [node name="rock" parent="." unique_id=1149330400 instance=ExtResource("8_7eaep")]
-position = Vector2(435, 581)
+position = Vector2(435, 572)
 
 [node name="rock2" parent="." unique_id=1932664036 instance=ExtResource("8_7eaep")]
-position = Vector2(759, 381)
+position = Vector2(700, 572)
+
+[node name="rock3" parent="." unique_id=1932664037 instance=ExtResource("8_7eaep")]
+position = Vector2(950, 572)
+
+[node name="rock4" parent="." unique_id=1932664038 instance=ExtResource("8_7eaep")]
+position = Vector2(1200, 572)
+
+[node name="rock5" parent="." unique_id=1932664039 instance=ExtResource("8_7eaep")]
+position = Vector2(1500, 572)
+
+[node name="LevelExit" type="Area2D" parent="." unique_id=1932664040]
+position = Vector2(1760, 680)
+script = ExtResource("10_exit")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelExit" unique_id=1932664041]
+shape = SubResource("RectangleShape2D_exit")

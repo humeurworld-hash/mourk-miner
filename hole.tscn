@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://hole_scene_001"]
+
+[ext_resource type="Script" path="res://hole.gd" id="1_holegd"]
+
+[sub_resource type="EllipseShape2D" id="EllipseShape2D_hole"]
+radius = Vector2(64, 20)
+
+[node name="Hole" type="Area2D"]
+script = ExtResource("1_holegd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("EllipseShape2D_hole")

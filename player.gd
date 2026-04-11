@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 const SPEED = 300.0
-const JUMP_FORCE = -400.0
+const JUMP_FORCE = -600.0
 const GRAVITY = 980.0
 const PICKAXE_RANGE = 60.0
 const PICKAXE_DAMAGE = 1
@@ -9,6 +9,8 @@ const PICKAXE_DAMAGE = 1
 var shards_collected: int = 0
 var can_swing: bool = true
 var facing_right: bool = true
+
+@onready var axe: Sprite2D = $Axe
 
 signal pickaxe_hit(hit_position: Vector2, direction: float)
 
@@ -26,6 +28,7 @@ func _physics_process(delta: float) -> void:
 	if direction:
 		velocity.x = direction * SPEED
 		facing_right = direction > 0
+		axe.scale.x = 0.08 if facing_right else -0.08
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED * 0.3)
 
@@ -38,9 +41,15 @@ func _physics_process(delta: float) -> void:
 func swing_pickaxe() -> void:
 	can_swing = false
 
-	# Determine swing direction
 	var swing_dir = 1.0 if facing_right else -1.0
-	var hit_pos = global_position + Vector2(PICKAXE_RANGE * swing_dir, 0)
+
+	# Animate the axe: chop forward then return
+	var chop_rotation = 1.4 * swing_dir
+	var tween = create_tween()
+	tween.tween_property(axe, "rotation", chop_rotation, 0.12)
+	tween.tween_property(axe, "rotation", 0.0, 0.18)
+
+	var hit_pos = global_position + Vector2(PICKAXE_RANGE * swing_dir, 227)
 
 	# Check for rocks in range
 	var space = get_world_2d().direct_space_state
