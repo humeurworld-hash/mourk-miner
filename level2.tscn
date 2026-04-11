@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://cvkjl5w0rnr51" path="res://rock.tscn" id="7_l2rock"]
 [ext_resource type="AudioStream" uid="uid://dv35dvk00m4r" path="res://echoveil/music/Mist in the Circuit.mp3" id="8_l2music"]
 [ext_resource type="Texture2D" uid="uid://chks8f75txysc" path="res://echoveil/platforms/Rocks/26BD4AED-AB96-4AD0-B798-DAE0D240A86D 2.png" id="11_l2shardicon"]
+[ext_resource type="PackedScene" path="res://drone.tscn" id="12_l2drone"]
 [ext_resource type="Script" uid="uid://dwkpblhyl2ow0" path="res://level_exit.gd" id="9_l2exit"]
 [ext_resource type="Texture2D" uid="uid://cw1wyoi6ixc0a" path="res://echoveil/platforms/IMG_2812 2.png" id="10_l2plat"]
 
@@ -165,6 +166,18 @@ position = Vector2(1400, 452)
 
 [node name="rock11" parent="." unique_id=3000000042 instance=ExtResource("7_l2rock")]
 position = Vector2(1500, 572)
+
+[node name="Drone1" parent="." unique_id=3000000051 instance=ExtResource("12_l2drone")]
+position = Vector2(480, 490)
+
+[node name="Drone2" parent="." unique_id=3000000052 instance=ExtResource("12_l2drone")]
+position = Vector2(850, 460)
+
+[node name="Drone3" parent="." unique_id=3000000053 instance=ExtResource("12_l2drone")]
+position = Vector2(1200, 480)
+
+[node name="Drone4" parent="." unique_id=3000000054 instance=ExtResource("12_l2drone")]
+position = Vector2(1550, 470)
 
 [node name="LevelExit" type="Area2D" parent="." unique_id=3000000043]
 position = Vector2(1760, 680)
