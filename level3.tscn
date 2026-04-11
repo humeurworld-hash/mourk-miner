@@ -1,0 +1,274 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://touch_controls.tscn" id="0_l3touch"]
+[ext_resource type="Texture2D" uid="uid://6r3wvh6f772y" path="res://echoveil/backgrounds/farback.PNG" id="1_l3far"]
+[ext_resource type="Texture2D" uid="uid://babv60bw0cyec" path="res://echoveil/backgrounds/foreground.png" id="2_l3near"]
+[ext_resource type="Script" uid="uid://dp6vls7m6rpgi" path="res://player.gd" id="3_l3player"]
+[ext_resource type="Texture2D" uid="uid://caqlyshv6hael" path="res://echoveil/forme/Remove background project 2.PNG" id="4_l3sprite"]
+[ext_resource type="Texture2D" uid="uid://d2skcubfsp1m" path="res://echoveil/forme/Glowing fantasy battle axe design.png" id="5_l3axe"]
+[ext_resource type="Script" uid="uid://uewak7cunake" path="res://hud.gd" id="6_l3hud"]
+[ext_resource type="PackedScene" uid="uid://cvkjl5w0rnr51" path="res://rock.tscn" id="7_l3rock"]
+[ext_resource type="AudioStream" uid="uid://wjgw140fk230" path="res://echoveil/music/Mist in the Circuit-2.mp3" id="8_l3music"]
+[ext_resource type="Texture2D" uid="uid://chks8f75txysc" path="res://echoveil/platforms/Rocks/26BD4AED-AB96-4AD0-B798-DAE0D240A86D 2.png" id="11_l3shardicon"]
+[ext_resource type="PackedScene" path="res://drone.tscn" id="12_l3drone"]
+[ext_resource type="Script" uid="uid://dwkpblhyl2ow0" path="res://level_exit.gd" id="9_l3exit"]
+[ext_resource type="Texture2D" uid="uid://cw1wyoi6ixc0a" path="res://echoveil/platforms/IMG_2812 2.png" id="10_l3plat"]
+[ext_resource type="PackedScene" path="res://special_rock.tscn" id="15_l3sr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l3body"]
+size = Vector2(114, 122)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l3axe"]
+size = Vector2(54.5, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l3floorleft"]
+size = Vector2(1900, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l3floorright"]
+size = Vector2(200, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l3plat"]
+size = Vector2(200, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l3exit"]
+size = Vector2(120, 100)
+
+[node name="Level3" type="Node2D" unique_id=6000000001]
+
+[node name="background" type="Parallax2D" parent="." unique_id=6000000002]
+
+[node name="farlayer" type="ParallaxLayer" parent="background" unique_id=6000000003]
+motion_scale = Vector2(0.2, 0.2)
+
+[node name="Sprite2D" type="Sprite2D" parent="background/farlayer" unique_id=6000000004]
+position = Vector2(525, 362)
+modulate = Color(0.55, 0.12, 0.12, 1)
+texture = ExtResource("1_l3far")
+
+[node name="Sprite2D2" type="Sprite2D" parent="background/farlayer" unique_id=6000000005]
+position = Vector2(1789, 362)
+modulate = Color(0.55, 0.12, 0.12, 1)
+texture = ExtResource("1_l3far")
+
+[node name="nearlayer" type="ParallaxLayer" parent="background" unique_id=6000000006]
+position = Vector2(46, 521)
+
+[node name="Sprite2D" type="Sprite2D" parent="background/nearlayer" unique_id=6000000007]
+position = Vector2(478.9976, 53)
+scale = Vector2(1.0000038, 0.9114)
+modulate = Color(0.50, 0.10, 0.10, 1)
+texture = ExtResource("2_l3near")
+
+[node name="Player" type="CharacterBody2D" parent="." unique_id=6000000008]
+position = Vector2(200, 100)
+script = ExtResource("3_l3player")
+groups = ["player"]
+
+[node name="Sprite2D" type="Sprite2D" parent="Player" unique_id=6000000009]
+position = Vector2(3, 227)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("4_l3sprite")
+
+[node name="Axe" type="Sprite2D" parent="Player" unique_id=6000000010]
+position = Vector2(60, 220)
+scale = Vector2(0.08, 0.08)
+texture = ExtResource("5_l3axe")
+
+[node name="forme" type="CollisionShape2D" parent="Player" unique_id=6000000011]
+position = Vector2(3, 227)
+shape = SubResource("RectangleShape2D_l3body")
+
+[node name="PickaxeHitbox" type="Area2D" parent="Player" unique_id=6000000012]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/PickaxeHitbox" unique_id=6000000013]
+position = Vector2(97.25, 227)
+shape = SubResource("RectangleShape2D_l3axe")
+
+[node name="Camera2D" type="Camera2D" parent="Player" unique_id=6000000014]
+position = Vector2(0, 182)
+
+[node name="RayCast2D" type="RayCast2D" parent="Player" unique_id=6000000015]
+position = Vector2(75, 253)
+target_position = Vector2(50, 0)
+collision_mask = 2
+collide_with_areas = true
+
+[node name="FloorLeft" type="StaticBody2D" parent="." unique_id=6000000016]
+position = Vector2(750, 619)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FloorLeft" unique_id=6000000017]
+shape = SubResource("RectangleShape2D_l3floorleft")
+
+[node name="FloorRight" type="StaticBody2D" parent="." unique_id=6000000030]
+position = Vector2(1860, 619)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FloorRight" unique_id=6000000031]
+shape = SubResource("RectangleShape2D_l3floorright")
+
+[node name="Platform1" type="StaticBody2D" parent="." unique_id=6000000032]
+position = Vector2(500, 490)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform1" unique_id=6000000033]
+position = Vector2(0, -17)
+one_way_collision = true
+shape = SubResource("RectangleShape2D_l3plat")
+
+[node name="Sprite2D" type="Sprite2D" parent="Platform1" unique_id=6000000045]
+scale = Vector2(0.16355681, 0.08593709)
+texture = ExtResource("10_l3plat")
+
+[node name="Platform2" type="StaticBody2D" parent="." unique_id=6000000034]
+position = Vector2(880, 455)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform2" unique_id=6000000035]
+position = Vector2(0, -17)
+one_way_collision = true
+shape = SubResource("RectangleShape2D_l3plat")
+
+[node name="Sprite2D" type="Sprite2D" parent="Platform2" unique_id=6000000046]
+scale = Vector2(0.16355681, 0.08593709)
+texture = ExtResource("10_l3plat")
+
+[node name="Platform3" type="StaticBody2D" parent="." unique_id=6000000036]
+position = Vector2(1220, 490)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform3" unique_id=6000000037]
+position = Vector2(0, -17)
+one_way_collision = true
+shape = SubResource("RectangleShape2D_l3plat")
+
+[node name="Sprite2D" type="Sprite2D" parent="Platform3" unique_id=6000000047]
+scale = Vector2(0.16355681, 0.08593709)
+texture = ExtResource("10_l3plat")
+
+[node name="Platform4" type="StaticBody2D" parent="." unique_id=6000000056]
+position = Vector2(1560, 455)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform4" unique_id=6000000057]
+position = Vector2(0, -17)
+one_way_collision = true
+shape = SubResource("RectangleShape2D_l3plat")
+
+[node name="Sprite2D" type="Sprite2D" parent="Platform4" unique_id=6000000058]
+scale = Vector2(0.16355681, 0.08593709)
+texture = ExtResource("10_l3plat")
+
+[node name="rock" parent="." unique_id=6000000018 instance=ExtResource("7_l3rock")]
+position = Vector2(280, 561)
+
+[node name="rock2" parent="." unique_id=6000000019 instance=ExtResource("7_l3rock")]
+position = Vector2(390, 561)
+
+[node name="rock3" parent="." unique_id=6000000020 instance=ExtResource("7_l3rock")]
+position = Vector2(500, 417)
+
+[node name="rock4" parent="." unique_id=6000000021 instance=ExtResource("7_l3rock")]
+position = Vector2(700, 561)
+
+[node name="rock5" parent="." unique_id=6000000022 instance=ExtResource("7_l3rock")]
+position = Vector2(880, 382)
+
+[node name="rock6" parent="." unique_id=6000000023 instance=ExtResource("15_l3sr")]
+position = Vector2(930, 382)
+
+[node name="rock7" parent="." unique_id=6000000038 instance=ExtResource("7_l3rock")]
+position = Vector2(1000, 561)
+
+[node name="rock8" parent="." unique_id=6000000039 instance=ExtResource("7_l3rock")]
+position = Vector2(1220, 417)
+
+[node name="rock9" parent="." unique_id=6000000040 instance=ExtResource("7_l3rock")]
+position = Vector2(1350, 561)
+
+[node name="rock10" parent="." unique_id=6000000041 instance=ExtResource("7_l3rock")]
+position = Vector2(1560, 382)
+
+[node name="rock11" parent="." unique_id=6000000042 instance=ExtResource("15_l3sr")]
+position = Vector2(1610, 382)
+
+[node name="rock12" parent="." unique_id=6000000059 instance=ExtResource("7_l3rock")]
+position = Vector2(1700, 561)
+
+[node name="Drone1" parent="." unique_id=6000000051 instance=ExtResource("12_l3drone")]
+position = Vector2(380, 535)
+
+[node name="Drone2" parent="." unique_id=6000000052 instance=ExtResource("12_l3drone")]
+position = Vector2(600, 435)
+
+[node name="Drone3" parent="." unique_id=6000000053 instance=ExtResource("12_l3drone")]
+position = Vector2(980, 400)
+
+[node name="Drone4" parent="." unique_id=6000000054 instance=ExtResource("12_l3drone")]
+position = Vector2(1300, 435)
+
+[node name="Drone5" parent="." unique_id=6000000060 instance=ExtResource("12_l3drone")]
+position = Vector2(1650, 535)
+
+[node name="LevelExit" type="Area2D" parent="." unique_id=6000000043]
+position = Vector2(1660, 680)
+script = ExtResource("9_l3exit")
+next_scene = "res://gameclaude.tscn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelExit" unique_id=6000000044]
+shape = SubResource("RectangleShape2D_l3exit")
+
+[node name="Sprite2D" type="Sprite2D" parent="LevelExit" unique_id=6000000061]
+position = Vector2(-6.0000277, -60.999992)
+scale = Vector2(0.16843835, 0.10947194)
+texture = ExtResource("10_l3plat")
+
+[node name="Music" type="AudioStreamPlayer" parent="." unique_id=6000000026]
+stream = ExtResource("8_l3music")
+autoplay = true
+volume_db = -6.0
+
+[node name="TouchControls" parent="." unique_id=6000000050 instance=ExtResource("0_l3touch")]
+
+[node name="HUD" type="CanvasLayer" parent="." unique_id=6000000024]
+script = ExtResource("6_l3hud")
+
+[node name="ShardIcon" type="TextureRect" parent="HUD" unique_id=6000000048]
+offset_left = 15.0
+offset_top = 15.0
+offset_right = 47.0
+offset_bottom = 36.0
+texture = ExtResource("11_l3shardicon")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="ShardLabel" type="Label" parent="HUD" unique_id=6000000025]
+offset_left = 55.0
+offset_top = 10.0
+offset_right = 250.0
+offset_bottom = 45.0
+theme_override_colors/font_color = Color(0.9098039, 0.7882353, 0.3019608, 1)
+theme_override_font_sizes/font_size = 26
+text = "x 0"
+
+[node name="HealthLabel" type="Label" parent="HUD" unique_id=6000000049]
+anchor_left = 1.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 0.0
+offset_left = -250.0
+offset_top = 10.0
+offset_right = -15.0
+offset_bottom = 45.0
+theme_override_colors/font_color = Color(0.4, 0.85, 0.9, 1)
+theme_override_font_sizes/font_size = 28
+text = "♦ ♦ ♦"
+horizontal_alignment = 2
+
+[node name="LivesLabel" type="Label" parent="HUD" unique_id=6000000062]
+anchor_left = 1.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 0.0
+offset_left = -250.0
+offset_top = 48.0
+offset_right = -15.0
+offset_bottom = 80.0
+theme_override_colors/font_color = Color(0.9, 0.3, 1.0, 1)
+theme_override_font_sizes/font_size = 22
+text = ""
+horizontal_alignment = 2
