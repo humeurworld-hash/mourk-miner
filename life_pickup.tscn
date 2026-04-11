@@ -1,6 +1,6 @@
-[gd_scene format=3 uid="uid://life_pickup_sc"]
+[gd_scene format=3]
 
-[ext_resource type="Script" path="res://life_pickup.gd" id="1_lp"]
+[ext_resource type="Script" uid="uid://c50veinift3wm" path="res://life_pickup.gd" id="1_lp"]
 [ext_resource type="Texture2D" uid="uid://chks8f75txysc" path="res://echoveil/platforms/Rocks/26BD4AED-AB96-4AD0-B798-DAE0D240A86D 2.png" id="2_lp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lp"]
