@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://d2skcubfsp1m" path="res://echoveil/forme/Glowing fantasy battle axe design.png" id="9_axe"]
 [ext_resource type="Texture2D" uid="uid://cw1wyoi6ixc0a" path="res://echoveil/platforms/IMG_2812 2.png" id="9_jep2d"]
 [ext_resource type="Script" uid="uid://dwkpblhyl2ow0" path="res://level_exit.gd" id="10_exit"]
-[ext_resource type="AudioStream" uid="uid://dv35dvk00m4r" path="res://echoveil/music/Mist in the Circuit.mp3" id="11_music"]
+[ext_resource type="AudioStream" uid="uid://wjgw140fk230" path="res://echoveil/music/Mist in the Circuit-2.mp3" id="11_music"]
 [ext_resource type="Texture2D" uid="uid://chks8f75txysc" path="res://echoveil/platforms/Rocks/26BD4AED-AB96-4AD0-B798-DAE0D240A86D 2.png" id="12_shardicon"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e2o6t"]

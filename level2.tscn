@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://d2skcubfsp1m" path="res://echoveil/forme/Glowing fantasy battle axe design.png" id="5_l2axe"]
 [ext_resource type="Script" uid="uid://uewak7cunake" path="res://hud.gd" id="6_l2hud"]
 [ext_resource type="PackedScene" uid="uid://cvkjl5w0rnr51" path="res://rock.tscn" id="7_l2rock"]
-[ext_resource type="AudioStream" uid="uid://dv35dvk00m4r" path="res://echoveil/music/Mist in the Circuit.mp3" id="8_l2music"]
+[ext_resource type="AudioStream" uid="uid://wjgw140fk230" path="res://echoveil/music/Mist in the Circuit-2.mp3" id="8_l2music"]
 [ext_resource type="Texture2D" uid="uid://chks8f75txysc" path="res://echoveil/platforms/Rocks/26BD4AED-AB96-4AD0-B798-DAE0D240A86D 2.png" id="11_l2shardicon"]
 [ext_resource type="PackedScene" path="res://drone.tscn" id="12_l2drone"]
 [ext_resource type="Script" uid="uid://dwkpblhyl2ow0" path="res://level_exit.gd" id="9_l2exit"]
