@@ -1,6 +1,6 @@
 [gd_resource type="SpriteFrames" load_steps=6 format=3]
 
-[ext_resource type="Texture2D" path="res://echoveil/forme/fuse_sheet.png" id="1_fuse"]
+[ext_resource type="Texture2D" path="res://echoveil/forme/fuse_sheet.PNG" id="1_fuse"]
 
 [sub_resource type="AtlasTexture" id="AT_fi0"]
 atlas = ExtResource("1_fuse")
