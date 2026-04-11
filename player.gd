@@ -10,6 +10,7 @@ var can_swing: bool = true
 var facing_right: bool = true
 
 @onready var axe: Sprite2D = $Axe
+@onready var body_sprite: Sprite2D = $Sprite2D
 @onready var swing_sound: AudioStreamPlayer = AudioStreamPlayer.new()
 
 signal pickaxe_hit(hit_position: Vector2, direction: float)
@@ -41,7 +42,9 @@ func _physics_process(delta: float) -> void:
 	if direction:
 		velocity.x = direction * SPEED
 		facing_right = direction > 0
+		body_sprite.flip_h = not facing_right
 		axe.scale.x = 0.08 if facing_right else -0.08
+		axe.position.x = 60 if facing_right else -60
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED * 0.3)
 
