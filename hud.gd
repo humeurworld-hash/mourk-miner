@@ -10,11 +10,11 @@ func _process(_delta: float) -> void:
 
 	$ShardLabel.text = "x " + str(player.shards_collected)
 
-	# Health diamonds (cyan)
-	var health_str = ""
-	for i in range(player.health):
-		health_str += "♦ "
-	$HealthLabel.text = health_str.strip_edges()
+	# Health crystals
+	var health = player.health
+	$HealthShard1.visible = health >= 1
+	$HealthShard2.visible = health >= 2
+	$HealthShard3.visible = health >= 3
 
 	# Lives display + Break indicator
 	var lives = GameState.lives

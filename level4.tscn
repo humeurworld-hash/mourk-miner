@@ -19,6 +19,16 @@
 [ext_resource type="PackedScene" path="res://special_rock.tscn" id="15_l4sr"]
 [ext_resource type="Texture2D" uid="uid://db1t01ixuywr1" path="res://echoveil/platforms/holes exits/hole exits new.PNG" id="16_l4hole"]
 [ext_resource type="Texture2D" uid="uid://bqvm0mk4h4u14" path="res://echoveil/platforms/Platforms and mourks /76D2A5B2-6585-4555-8C6B-C6D25CF6C6CD-4.png" id="17_l4cliff"]
+[ext_resource type="Texture2D" path="res://echoveil/UI/mourk counter/220E297F-BA40-4195-9E91-D295DD553BA9-2.png" id="18_l4mc"]
+[ext_resource type="Texture2D" path="res://echoveil/UI/Life shards/220E297F-BA40-4195-9E91-D295DD553BA9-1.png" id="19_l4ls"]
+
+[sub_resource type="AtlasTexture" id="AT_l4mc"]
+atlas = ExtResource("18_l4mc")
+region = Rect2(120, 399, 697, 229)
+
+[sub_resource type="AtlasTexture" id="AT_l4ls"]
+atlas = ExtResource("19_l4ls")
+region = Rect2(913, 413, 119, 230)
 
 [sub_resource type="AtlasTexture" id="AT_l4cliff"]
 atlas = ExtResource("17_l4cliff")
@@ -284,46 +294,66 @@ autoplay = true
 script = ExtResource("6_l4hud")
 
 [node name="ShardIcon" type="TextureRect" parent="HUD"]
-offset_left = 15.0
-offset_top = 15.0
-offset_right = 47.0
-offset_bottom = 36.0
-texture = ExtResource("9_l4si")
+offset_left = 10.0
+offset_top = 8.0
+offset_right = 254.0
+offset_bottom = 88.0
+texture = SubResource("AT_l4mc")
 expand_mode = 1
 stretch_mode = 6
 
 [node name="ShardLabel" type="Label" parent="HUD"]
-offset_left = 55.0
-offset_top = 10.0
-offset_right = 250.0
-offset_bottom = 45.0
+offset_left = 120.0
+offset_top = 22.0
+offset_right = 248.0
+offset_bottom = 76.0
 theme_override_colors/font_color = Color(0.9098039, 0.7882353, 0.3019608, 1)
-theme_override_font_sizes/font_size = 26
+theme_override_font_sizes/font_size = 22
 text = "x 0"
 
-[node name="HealthLabel" type="Label" parent="HUD"]
-anchors_preset = 1
+[node name="HealthShard1" type="TextureRect" parent="HUD"]
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -250.0
+offset_left = -38.0
 offset_top = 10.0
-offset_right = -15.0
-offset_bottom = 45.0
-theme_override_colors/font_color = Color(0.4, 0.85, 0.9, 1)
-theme_override_font_sizes/font_size = 28
-text = "♦ ♦ ♦"
-horizontal_alignment = 2
+offset_right = -12.0
+offset_bottom = 60.0
+texture = SubResource("AT_l4ls")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="HealthShard2" type="TextureRect" parent="HUD"]
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -69.0
+offset_top = 10.0
+offset_right = -43.0
+offset_bottom = 60.0
+texture = SubResource("AT_l4ls")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="HealthShard3" type="TextureRect" parent="HUD"]
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -100.0
+offset_top = 10.0
+offset_right = -74.0
+offset_bottom = 60.0
+texture = SubResource("AT_l4ls")
+expand_mode = 1
+stretch_mode = 6
 
 [node name="LivesLabel" type="Label" parent="HUD"]
 anchor_left = 1.0
 anchor_top = 0.0
 anchor_right = 1.0
 anchor_bottom = 0.0
-offset_left = -250.0
-offset_top = 48.0
-offset_right = -15.0
-offset_bottom = 80.0
+offset_left = -120.0
+offset_top = 65.0
+offset_right = -10.0
+offset_bottom = 92.0
 theme_override_colors/font_color = Color(0.9, 0.3, 1.0, 1)
-theme_override_font_sizes/font_size = 22
+theme_override_font_sizes/font_size = 20
 text = ""
 horizontal_alignment = 2
