@@ -15,6 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://chks8f75txysc" path="res://echoveil/platforms/Rocks/26BD4AED-AB96-4AD0-B798-DAE0D240A86D 2.png" id="12_shardicon"]
 [ext_resource type="PackedScene" path="res://drone.tscn" id="13_drone"]
 [ext_resource type="PackedScene" path="res://special_rock.tscn" id="14_sr"]
+[ext_resource type="Texture2D" uid="uid://db1t01ixuywr1" path="res://echoveil/platforms/holes exits/hole exits new.PNG" id="15_hole"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e2o6t"]
 size = Vector2(114, 122)
@@ -200,9 +201,9 @@ position = Vector2(0, -15.5)
 shape = SubResource("RectangleShape2D_exit")
 
 [node name="Sprite2D" type="Sprite2D" parent="LevelExit" unique_id=1394877158]
-position = Vector2(-6.0000277, -60.999992)
-scale = Vector2(0.16843835, 0.10947194)
-texture = ExtResource("9_jep2d")
+position = Vector2(0, -61)
+scale = Vector2(0.20, 0.20)
+texture = ExtResource("15_hole")
 
 [node name="Music" type="AudioStreamPlayer" parent="." unique_id=1932664042]
 stream = ExtResource("11_music")

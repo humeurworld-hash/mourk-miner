@@ -17,6 +17,7 @@
 [ext_resource type="Script" path="res://prime_mourk.gd" id="13_l4pm"]
 [ext_resource type="Texture2D" uid="uid://caqlyshv6hael" path="res://echoveil/forme/Remove background project 2.PNG" id="14_l4pm_tex"]
 [ext_resource type="PackedScene" path="res://special_rock.tscn" id="15_l4sr"]
+[ext_resource type="Texture2D" uid="uid://db1t01ixuywr1" path="res://echoveil/platforms/holes exits/hole exits new.PNG" id="16_l4hole"]
 
 [sub_resource type="RectangleShape2D" id="RS_body"]
 size = Vector2(114, 122)
@@ -248,9 +249,9 @@ position = Vector2(0, -15.5)
 shape = SubResource("RS_exit")
 
 [node name="Sprite2D" type="Sprite2D" parent="LevelExit"]
-position = Vector2(-6.0, -61.0)
-scale = Vector2(0.168, 0.109)
-texture = ExtResource("12_l4plat")
+position = Vector2(0, -61)
+scale = Vector2(0.20, 0.20)
+texture = ExtResource("16_l4hole")
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_l4music")

@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" path="res://special_rock.tscn" id="15_l2sr"]
 [ext_resource type="Script" uid="uid://dwkpblhyl2ow0" path="res://level_exit.gd" id="9_l2exit"]
 [ext_resource type="Texture2D" uid="uid://cw1wyoi6ixc0a" path="res://echoveil/platforms/IMG_2812 2.png" id="10_l2plat"]
+[ext_resource type="Texture2D" uid="uid://db1t01ixuywr1" path="res://echoveil/platforms/holes exits/hole exits new.PNG" id="16_l2hole"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l2body"]
 size = Vector2(114, 122)
@@ -202,6 +203,11 @@ next_scene = "res://level3.tscn"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LevelExit" unique_id=3000000044]
 shape = SubResource("RectangleShape2D_l2exit")
+
+[node name="Sprite2D" type="Sprite2D" parent="LevelExit" unique_id=3000000090]
+position = Vector2(0, -61)
+scale = Vector2(0.20, 0.20)
+texture = ExtResource("16_l2hole")
 
 [node name="Music" type="AudioStreamPlayer" parent="." unique_id=3000000026]
 stream = ExtResource("8_l2music")
