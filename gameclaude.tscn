@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://b0uuaa3shw8mu"]
 
 [ext_resource type="PackedScene" path="res://touch_controls.tscn" id="0_touch"]
+[ext_resource type="PackedScene" path="res://chest.tscn" id="chest_scene"]
 [ext_resource type="Script" uid="uid://dp6vls7m6rpgi" path="res://player.gd" id="4_jep2d"]
 [ext_resource type="SpriteFrames" uid="uid://c7ronklbxhj4o" path="res://fuse_frames.tres" id="5_fframes"]
 [ext_resource type="SpriteFrames" uid="uid://dgco3rqfqmgyb" path="res://player_frames.tres" id="5_pframes"]
@@ -22,6 +23,7 @@
 [ext_resource type="Texture2D" uid="uid://bexa4tk6muxfh" path="res://echoveil/backgrounds/Background update/Untitled_Artwork-5.png" id="bg5_gc"]
 [ext_resource type="Texture2D" uid="uid://bt5s2yeo02jif" path="res://echoveil/backgrounds/Background update/Untitled_Artwork-6.png" id="bg6_gc"]
 [ext_resource type="Texture2D" uid="uid://ba0v157kmp0ca" path="res://echoveil/backgrounds/Background update/Untitled_Artwork-7.png" id="bg7_gc"]
+[ext_resource type="Texture2D" uid="uid://cw1wyoi6ixc0a" path="res://echoveil/platforms/IMG_2812 2.png" id="plat_tex"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e2o6t"]
 size = Vector2(114, 122)
@@ -30,7 +32,7 @@ size = Vector2(114, 122)
 size = Vector2(54.5, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_leftfloor"]
-size = Vector2(2810, 20)
+size = Vector2(2927, 20)
 
 [sub_resource type="AtlasTexture" id="AT_gc_mc"]
 atlas = ExtResource("17_gc_mc")
@@ -41,7 +43,7 @@ atlas = ExtResource("18_gc_ls")
 region = Rect2(913, 413, 119, 230)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_exit"]
-size = Vector2(120, 131)
+size = Vector2(111, 38)
 
 [sub_resource type="RectangleShape2D" id="RS_gcwall"]
 size = Vector2(30, 700)
@@ -49,6 +51,12 @@ size = Vector2(30, 700)
 [sub_resource type="AtlasTexture" id="AT_gccliff"]
 atlas = ExtResource("16_cliff")
 region = Rect2(661, 745, 250, 155)
+
+[sub_resource type="RectangleShape2D" id="RS_smallplat"]
+size = Vector2(261, 38)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tw763"]
+size = Vector2(1342, 16.25)
 
 [node name="Game" type="Node2D" unique_id=1161058939]
 
@@ -58,15 +66,16 @@ region = Rect2(661, 745, 250, 155)
 motion_scale = Vector2(0.05, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="background/layer1" unique_id=1347840160]
-position = Vector2(2573, 127)
+position = Vector2(1454.25, 127)
+scale = Vector2(0.56595534, 1)
 texture = ExtResource("bg1_gc")
 
 [node name="layer2" type="ParallaxLayer" parent="background" unique_id=337948030]
 motion_scale = Vector2(0.15, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="background/layer2" unique_id=74516611]
-position = Vector2(2575.75, 380)
-scale = Vector2(1.000485, 1)
+position = Vector2(1401.5, 380)
+scale = Vector2(0.5449078, 1)
 texture = ExtResource("bg2_gc")
 
 [node name="layer3" type="ParallaxLayer" parent="background" unique_id=1359295579]
@@ -74,35 +83,39 @@ motion_scale = Vector2(0.28, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="background/layer3" unique_id=347034113]
 modulate = Color(1, 1, 1, 0.65)
-position = Vector2(2577, 450)
+position = Vector2(1398.25, 450)
+scale = Vector2(0.542677, 1)
 texture = ExtResource("bg3_gc")
 
 [node name="layer4" type="ParallaxLayer" parent="background" unique_id=23088398]
 motion_scale = Vector2(0.42, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="background/layer4" unique_id=566403662]
-position = Vector2(2577, 550)
+position = Vector2(1407.75, 550)
+scale = Vector2(0.54636276, 1)
 texture = ExtResource("bg4_gc")
 
 [node name="layer5" type="ParallaxLayer" parent="background" unique_id=125882652]
 motion_scale = Vector2(0.58, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="background/layer5" unique_id=566265174]
-position = Vector2(2571, 561)
+position = Vector2(1452.75, 561)
+scale = Vector2(0.56614935, 1)
 texture = ExtResource("bg5_gc")
 
 [node name="layer6" type="ParallaxLayer" parent="background" unique_id=495460802]
 motion_scale = Vector2(0.75, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="background/layer6" unique_id=1305148847]
-position = Vector2(2581.75, 432)
-scale = Vector2(1.1225024, 1.0969697)
+position = Vector2(1311, 239.50003)
+scale = Vector2(0.5761397, 0.8053031)
 texture = ExtResource("bg6_gc")
 
 [node name="nearlayer" type="ParallaxLayer" parent="background" unique_id=1278689398]
 
 [node name="Sprite2D" type="Sprite2D" parent="background/nearlayer" unique_id=1231864662]
-position = Vector2(2564, 412)
+position = Vector2(1456.2501, 412)
+scale = Vector2(0.5702231, 1)
 texture = ExtResource("bg7_gc")
 
 [node name="Player" type="CharacterBody2D" parent="." unique_id=1770645815 groups=["player"]]
@@ -151,6 +164,7 @@ collide_with_areas = true
 position = Vector2(1405, 619)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Floor" unique_id=472077029]
+position = Vector2(58.5, 0)
 shape = SubResource("RectangleShape2D_leftfloor")
 
 [node name="HUD" type="CanvasLayer" parent="." unique_id=1395744975]
@@ -257,17 +271,17 @@ position = Vector2(1680, 538)
 drops_shard = true
 
 [node name="LevelExit" type="Area2D" parent="." unique_id=1932664040]
-position = Vector2(2560, 619)
+position = Vector2(2559, 621)
 script = ExtResource("10_exit")
 next_scene = "res://win_screen.tscn"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LevelExit" unique_id=1932664041]
-position = Vector2(0, -15.5)
+position = Vector2(53.5, 6)
 shape = SubResource("RectangleShape2D_exit")
 
 [node name="Sprite2D" type="Sprite2D" parent="LevelExit" unique_id=1394877158]
-position = Vector2(0, -61)
-scale = Vector2(0.2, 0.2)
+position = Vector2(45.600006, -5.000061)
+scale = Vector2(0.15807287, 0.15664063)
 texture = ExtResource("15_hole")
 
 [node name="Music" type="AudioStreamPlayer" parent="." unique_id=1932664042]
@@ -281,10 +295,91 @@ autoplay = true
 position = Vector2(2810, 619)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LevelWall" unique_id=711562306]
-position = Vector2(0, -350)
+position = Vector2(-85, -345)
 shape = SubResource("RS_gcwall")
 
 [node name="Sprite2D" type="Sprite2D" parent="LevelWall" unique_id=1854928162]
-position = Vector2(0, -116)
-scale = Vector2(1.5, 1.5)
+position = Vector2(16, -89)
+scale = Vector2(0.96599996, 0.982258)
 texture = SubResource("AT_gccliff")
+
+[node name="Platform1" type="StaticBody2D" parent="." unique_id=1227652357]
+position = Vector2(430, 490)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform1" unique_id=215449724]
+position = Vector2(1669, -292)
+shape = SubResource("RS_smallplat")
+one_way_collision = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Platform1" unique_id=564052966]
+position = Vector2(1662, -321)
+scale = Vector2(0.39329532, 0.12798634)
+texture = ExtResource("plat_tex")
+
+[node name="Platform2" type="StaticBody2D" parent="." unique_id=1933470361]
+position = Vector2(760, 470)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform2" unique_id=343599059]
+position = Vector2(-16, -30)
+shape = SubResource("RS_smallplat")
+one_way_collision = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Platform2" unique_id=157282060]
+position = Vector2(-19, -55.999996)
+scale = Vector2(0.16355681, 0.08593709)
+texture = ExtResource("plat_tex")
+
+[node name="Platform3" type="StaticBody2D" parent="." unique_id=754546745]
+position = Vector2(760, 470)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform3" unique_id=1694743221]
+position = Vector2(1066.5, -209)
+shape = SubResource("RS_smallplat")
+one_way_collision = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Platform3" unique_id=1940605146]
+position = Vector2(1061.5, -234.00002)
+scale = Vector2(0.38511848, 0.08593709)
+texture = ExtResource("plat_tex")
+
+[node name="LedgePlatform" type="StaticBody2D" parent="." unique_id=790426750]
+position = Vector2(1520, 401.875)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LedgePlatform" unique_id=421406606]
+shape = SubResource("RectangleShape2D_tw763")
+one_way_collision = true
+
+[node name="Sprite2D" type="Sprite2D" parent="LedgePlatform" unique_id=783664545]
+position = Vector2(-31.499966, 3.1249924)
+scale = Vector2(2.1234667, 0.1558098)
+texture = ExtResource("plat_tex")
+
+[node name="ledge_rock1" parent="." unique_id=2147212760 instance=ExtResource("8_7eaep")]
+position = Vector2(900, 347)
+
+[node name="ledge_rock2" parent="." unique_id=562213809 instance=ExtResource("8_7eaep")]
+position = Vector2(1050, 347)
+
+[node name="ledge_rock3" parent="." unique_id=171263665 instance=ExtResource("8_7eaep")]
+position = Vector2(1200, 347)
+
+[node name="ledge_rock4" parent="." unique_id=1443570895 instance=ExtResource("14_sr")]
+position = Vector2(1350, 347)
+
+[node name="ledge_rock5" parent="." unique_id=1335887940 instance=ExtResource("8_7eaep")]
+position = Vector2(1500, 347)
+
+[node name="ledge_rock6" parent="." unique_id=1843143147 instance=ExtResource("8_7eaep")]
+position = Vector2(1650, 347)
+
+[node name="ledge_rock7" parent="." unique_id=1817702260 instance=ExtResource("8_7eaep")]
+position = Vector2(1800, 347)
+
+[node name="ledge_rock8" parent="." unique_id=2142682069 instance=ExtResource("8_7eaep")]
+position = Vector2(1950, 347)
+
+[node name="ledge_rock9" parent="." unique_id=1060865222 instance=ExtResource("14_sr")]
+position = Vector2(2100, 347)
+
+[node name="Chest" parent="." instance=ExtResource("chest_scene")]
+position = Vector2(2050, 310)

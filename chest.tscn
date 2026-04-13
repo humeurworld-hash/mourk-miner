@@ -1,0 +1,62 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://chest.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://echoveil/platforms/Rocks and chest/chest/Chest/Empty.png" id="2_empty"]
+[ext_resource type="Texture2D" path="res://echoveil/platforms/Rocks and chest/chest/Chest/Slightly open.png" id="3_slight"]
+[ext_resource type="Texture2D" path="res://echoveil/platforms/Rocks and chest/chest/Chest/Peeking.png" id="4_peek"]
+[ext_resource type="Texture2D" path="res://echoveil/platforms/Rocks and chest/chest/Chest/Half open.png" id="5_half"]
+[ext_resource type="Texture2D" path="res://echoveil/platforms/Rocks and chest/chest/Chest/Fully open.png" id="6_full"]
+
+[sub_resource type="SpriteFrames" id="SF_chest"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_empty")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_empty")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_slight")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_peek")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_half")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_full")
+}],
+"loop": false,
+"name": &"open",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_empty")
+}],
+"loop": true,
+"name": &"empty",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RS_chest"]
+size = Vector2(130, 100)
+
+[node name="Chest" type="Area2D"]
+script = ExtResource("1_script")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SF_chest")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RS_chest")
