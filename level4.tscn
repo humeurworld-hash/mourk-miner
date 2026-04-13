@@ -241,6 +241,7 @@ position = Vector2(750, 400)
 
 [node name="Drone3" parent="." instance=ExtResource("10_l4drone")]
 position = Vector2(1150, 435)
+drops_shard = true
 
 [node name="Drone4" parent="." instance=ExtResource("10_l4drone")]
 position = Vector2(1650, 400)

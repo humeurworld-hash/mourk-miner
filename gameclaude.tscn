@@ -229,6 +229,7 @@ position = Vector2(850, 538)
 
 [node name="Drone2" parent="." unique_id=1932664049 instance=ExtResource("13_drone")]
 position = Vector2(1680, 538)
+drops_shard = true
 
 [node name="LevelExit" type="Area2D" parent="." unique_id=1932664040]
 position = Vector2(2560, 680)

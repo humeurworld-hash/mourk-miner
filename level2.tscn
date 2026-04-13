@@ -210,6 +210,7 @@ position = Vector2(750, 445)
 
 [node name="Drone3" parent="." unique_id=3000000053 instance=ExtResource("12_l2drone")]
 position = Vector2(1180, 535)
+drops_shard = true
 
 [node name="Drone4" parent="." unique_id=3000000054 instance=ExtResource("12_l2drone")]
 position = Vector2(1540, 535)

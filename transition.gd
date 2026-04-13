@@ -12,6 +12,8 @@ func _ready() -> void:
 
 func fade_in(duration: float = 0.4) -> void:
 	overlay.color = Color(0, 0, 0, 1)
+	# Wait one frame so the scene renders under the overlay before fading
+	await get_tree().process_frame
 	var tween = create_tween()
 	tween.tween_property(overlay, "color", Color(0, 0, 0, 0), duration)
 

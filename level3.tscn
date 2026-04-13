@@ -225,6 +225,7 @@ position = Vector2(600, 435)
 
 [node name="Drone3" parent="." unique_id=6000000053 instance=ExtResource("12_l3drone")]
 position = Vector2(980, 400)
+drops_shard = true
 
 [node name="Drone4" parent="." unique_id=6000000054 instance=ExtResource("12_l3drone")]
 position = Vector2(1300, 435)
@@ -235,7 +236,7 @@ position = Vector2(1650, 535)
 [node name="LevelExit" type="Area2D" parent="." unique_id=6000000043]
 position = Vector2(1660, 680)
 script = ExtResource("9_l3exit")
-next_scene = "res://gameclaude.tscn"
+next_scene = "res://level4.tscn"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LevelExit" unique_id=6000000044]
 shape = SubResource("RectangleShape2D_l3exit")
