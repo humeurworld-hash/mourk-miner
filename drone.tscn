@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" path="res://echoveil/Canvas/drones/Hovering robot with glowing trail.png" id="2_dronetex"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_drone"]
-size = Vector2(60, 80)
+size = Vector2(36, 48)
 
 [node name="Drone" type="Area2D" unique_id=5000000001]
 collision_layer = 2

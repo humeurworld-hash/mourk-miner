@@ -16,6 +16,14 @@
 [ext_resource type="PackedScene" path="res://drone.tscn" id="13_drone"]
 [ext_resource type="PackedScene" path="res://special_rock.tscn" id="14_sr"]
 [ext_resource type="Texture2D" uid="uid://db1t01ixuywr1" path="res://echoveil/platforms/holes exits/hole exits new.PNG" id="15_hole"]
+[ext_resource type="Texture2D" uid="uid://bqvm0mk4h4u14" path="res://echoveil/platforms/Platforms and mourks /76D2A5B2-6585-4555-8C6B-C6D25CF6C6CD-4.png" id="16_cliff"]
+
+[sub_resource type="AtlasTexture" id="AT_gccliff"]
+atlas = ExtResource("16_cliff")
+region = Rect2(661, 745, 250, 155)
+
+[sub_resource type="RectangleShape2D" id="RS_gcwall"]
+size = Vector2(30, 700)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e2o6t"]
 size = Vector2(114, 122)
@@ -72,7 +80,7 @@ autoplay = "idle"
 
 [node name="FuseSprite" type="AnimatedSprite2D" parent="Player" unique_id=1840483866]
 position = Vector2(40, 100)
-scale = Vector2(0.55, 0.55)
+scale = Vector2(0.36, 0.36)
 sprite_frames = ExtResource("5_fframes")
 animation = &"idle"
 autoplay = "idle"
@@ -211,3 +219,15 @@ volume_db = -6.0
 autoplay = true
 
 [node name="TouchControls" parent="." unique_id=1932664043 instance=ExtResource("0_touch")]
+
+[node name="LevelWall" type="StaticBody2D" parent="."]
+position = Vector2(2810, 619)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelWall"]
+position = Vector2(0, -350)
+shape = SubResource("RS_gcwall")
+
+[node name="Sprite2D" type="Sprite2D" parent="LevelWall"]
+position = Vector2(0, -116)
+scale = Vector2(1.5, 1.5)
+texture = SubResource("AT_gccliff")

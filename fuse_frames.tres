@@ -31,6 +31,14 @@ animations = [{
 "texture": SubResource("AT_fi0")
 }],
 "loop": true,
+"name": &"blank",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AT_fi0")
+}],
+"loop": true,
 "name": &"idle",
 "speed": 3.0
 }, {

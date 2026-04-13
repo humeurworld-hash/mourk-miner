@@ -60,7 +60,8 @@ func _ready() -> void:
 	add_child(lightning_sound)
 
 	body_sprite.play(&"idle")
-	fuse_sprite.play(&"idle")
+	fuse_sprite.play(&"blank")
+	fuse_sprite.modulate = Color(0.6, 0.6, 0.6, 1.0)
 
 func _process(_delta: float) -> void:
 	if is_dead:
@@ -165,10 +166,12 @@ func hit_by_drone() -> void:
 		stun_move_penalty = 0.65
 		shake_camera(4.0, 0.25)
 		_stun_flash()
+		fuse_sprite.modulate = Color(1.0, 1.0, 1.0, 1.0)
 		fuse_sprite.play(&"panic")
 		await get_tree().create_timer(0.6).timeout
 		if not is_dead:
-			fuse_sprite.play(&"idle")
+			fuse_sprite.play(&"blank")
+			fuse_sprite.modulate = Color(0.6, 0.6, 0.6, 1.0)
 	else:
 		# Second contact: lose a diamond
 		hit_state = 0
@@ -208,6 +211,7 @@ func _die() -> void:
 	set_physics_process(false)
 	velocity = Vector2.ZERO
 
+	fuse_sprite.modulate = Color(1.0, 1.0, 1.0, 1.0)
 	fuse_sprite.play(&"panic")
 	body_sprite.play(&"idle")
 
@@ -253,6 +257,7 @@ func swing_pickaxe() -> void:
 
 	swing_sound.play()
 	body_sprite.play(&"swing")
+	fuse_sprite.modulate = Color(1.0, 1.0, 1.0, 1.0)
 	fuse_sprite.play(&"react")
 
 	var hit_pos = global_position + Vector2(PICKAXE_RANGE * swing_dir, 227)
@@ -274,7 +279,8 @@ func swing_pickaxe() -> void:
 
 	await get_tree().create_timer(0.3).timeout
 	can_swing = true
-	fuse_sprite.play(&"idle")
+	fuse_sprite.play(&"blank")
+	fuse_sprite.modulate = Color(0.6, 0.6, 0.6, 1.0)
 	var resume = &"run" if abs(velocity.x) > 10 else &"idle"
 	body_sprite.play(resume)
 
@@ -283,6 +289,7 @@ func _lightning_strike() -> void:
 	GameState.lives = 0
 
 	lightning_sound.play()
+	fuse_sprite.modulate = Color(1.0, 1.0, 1.0, 1.0)
 	fuse_sprite.play(&"react")
 
 	var flash_layer = CanvasLayer.new()
@@ -312,5 +319,6 @@ func _lightning_strike() -> void:
 			drone.stun(4.0)
 
 	await get_tree().create_timer(1.0).timeout
-	fuse_sprite.play(&"idle")
+	fuse_sprite.play(&"blank")
+	fuse_sprite.modulate = Color(0.6, 0.6, 0.6, 1.0)
 	can_break = true
