@@ -81,7 +81,7 @@ texture = ExtResource("1_l4far")
 position = Vector2(46, 521)
 
 [node name="Sprite2D" type="Sprite2D" parent="background/nearlayer"]
-position = Vector2(478.9976, 53)
+position = Vector2(478.9976, 241)
 scale = Vector2(1.0000038, 0.9114)
 modulate = Color(0.22, 0.06, 0.38, 1)
 texture = ExtResource("2_l4near")
