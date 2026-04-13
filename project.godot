@@ -11,13 +11,15 @@ config_version=5
 [application]
 
 config/name="Mourk miner"
-run/main_scene="uid://b0uuaa3shw8mu"
+run/main_scene="res://main_menu.tscn"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [autoload]
 
 GameState="*res://game_state.gd"
+TransitionLayer="*res://transition.gd"
+LevelManager="*res://level_manager.gd"
 
 [display]
 

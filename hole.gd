@@ -40,4 +40,7 @@ func _draw() -> void:
 
 func _on_body_entered(body: Node) -> void:
 	if body.is_in_group("player"):
-		get_tree().change_scene_to_file(target_scene)
+		TransitionLayer.fade_out(
+			func(): get_tree().change_scene_to_file(target_scene),
+			0.5
+		)

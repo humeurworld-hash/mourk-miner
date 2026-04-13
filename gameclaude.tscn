@@ -63,15 +63,15 @@ position = Vector2(200, 300)
 script = ExtResource("4_jep2d")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player" unique_id=1840483865]
-position = Vector2(3, 226)
-scale = Vector2(0.43, 0.43)
+position = Vector2(0, 220)
+scale = Vector2(0.52, 0.52)
 sprite_frames = ExtResource("5_pframes")
 animation = &"idle"
 autoplay = "idle"
 
 [node name="FuseSprite" type="AnimatedSprite2D" parent="Player" unique_id=1840483866]
-position = Vector2(40, 160)
-scale = Vector2(0.35, 0.35)
+position = Vector2(40, 100)
+scale = Vector2(0.55, 0.55)
 sprite_frames = ExtResource("5_fframes")
 animation = &"idle"
 autoplay = "idle"

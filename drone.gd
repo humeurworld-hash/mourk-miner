@@ -11,6 +11,9 @@ var stunned: bool = false
 var stun_timer: float = 0.0
 var stun_tween: Tween = null
 
+var chasing: bool = false
+var chase_speed: float = 200.0
+
 func _ready() -> void:
 	add_to_group("drone")
 	start_x = position.x
@@ -27,24 +30,37 @@ func _process(delta: float) -> void:
 			_end_stun()
 		return
 
-	# Patrol left/right
-	position.x += patrol_speed * direction * delta
-	if abs(position.x - start_x) >= patrol_range:
-		direction *= -1
-		$Sprite2D.flip_h = direction < 0
-
-	# Hover up and down
 	hover_time += delta * 2.5
-	position.y = start_y + sin(hover_time) * 12.0
+
+	if chasing:
+		# Chase player horizontally, keep hover bob
+		var player = get_tree().get_first_node_in_group("player")
+		if player and is_instance_valid(player):
+			var dx = player.global_position.x - global_position.x
+			position.x += sign(dx) * chase_speed * delta
+			$Sprite2D.flip_h = dx < 0
+		position.y = start_y + sin(hover_time) * 12.0
+	else:
+		# Patrol left/right
+		position.x += patrol_speed * direction * delta
+		if abs(position.x - start_x) >= patrol_range:
+			direction *= -1
+			$Sprite2D.flip_h = direction < 0
+
+		# Hover up and down
+		position.y = start_y + sin(hover_time) * 12.0
 
 	# Damage player on contact
 	if damage_cooldown <= 0:
 		for body in get_overlapping_bodies():
 			if body.is_in_group("player"):
-				GameState.health = max(0, GameState.health - 1)
-				damage_cooldown = 1.5
-				_flash_player(body)
+				if body.has_method("hit_by_drone"):
+					body.hit_by_drone()
+				damage_cooldown = 0.2
 				break
+
+func activate_chase() -> void:
+	chasing = true
 
 func stun(duration: float) -> void:
 	# Kill any running stun tween before starting a new one
@@ -69,9 +85,3 @@ func take_damage(_amount: int) -> void:
 	# Axe briefly stuns — only if not already stunned
 	if not stunned:
 		stun(1.5)
-
-func _flash_player(player: Node) -> void:
-	if player.has_node("AnimatedSprite2D"):
-		var tween = create_tween()
-		tween.tween_property(player.get_node("AnimatedSprite2D"), "modulate", Color(1, 0.2, 0.2, 1), 0.1)
-		tween.tween_property(player.get_node("AnimatedSprite2D"), "modulate", Color(1, 1, 1, 1), 0.2)

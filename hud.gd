@@ -1,5 +1,8 @@
 extends CanvasLayer
 
+func _ready() -> void:
+	TransitionLayer.fade_in(0.5)
+
 func _process(_delta: float) -> void:
 	var player = get_tree().get_first_node_in_group("player")
 	if not player:

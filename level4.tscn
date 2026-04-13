@@ -1,0 +1,308 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://touch_controls.tscn" id="0_l4touch"]
+[ext_resource type="Texture2D" uid="uid://6r3wvh6f772y" path="res://echoveil/backgrounds/farback.PNG" id="1_l4far"]
+[ext_resource type="Texture2D" uid="uid://babv60bw0cyec" path="res://echoveil/backgrounds/foreground.png" id="2_l4near"]
+[ext_resource type="Script" uid="uid://dp6vls7m6rpgi" path="res://player.gd" id="3_l4player"]
+[ext_resource type="SpriteFrames" path="res://player_frames.tres" id="4_l4pf"]
+[ext_resource type="SpriteFrames" path="res://fuse_frames.tres" id="4_l4ff"]
+[ext_resource type="Texture2D" uid="uid://d2skcubfsp1m" path="res://echoveil/forme/Glowing fantasy battle axe design.png" id="5_l4axe"]
+[ext_resource type="Script" uid="uid://uewak7cunake" path="res://hud.gd" id="6_l4hud"]
+[ext_resource type="PackedScene" uid="uid://cvkjl5w0rnr51" path="res://rock.tscn" id="7_l4rock"]
+[ext_resource type="AudioStream" uid="uid://wjgw140fk230" path="res://echoveil/music/Mist in the Circuit-2.mp3" id="8_l4music"]
+[ext_resource type="Texture2D" uid="uid://chks8f75txysc" path="res://echoveil/platforms/Rocks/26BD4AED-AB96-4AD0-B798-DAE0D240A86D 2.png" id="9_l4si"]
+[ext_resource type="PackedScene" path="res://drone.tscn" id="10_l4drone"]
+[ext_resource type="Script" uid="uid://dwkpblhyl2ow0" path="res://level_exit.gd" id="11_l4exit"]
+[ext_resource type="Texture2D" uid="uid://cw1wyoi6ixc0a" path="res://echoveil/platforms/IMG_2812 2.png" id="12_l4plat"]
+[ext_resource type="Script" path="res://prime_mourk.gd" id="13_l4pm"]
+[ext_resource type="Texture2D" uid="uid://caqlyshv6hael" path="res://echoveil/forme/Remove background project 2.PNG" id="14_l4pm_tex"]
+[ext_resource type="PackedScene" path="res://special_rock.tscn" id="15_l4sr"]
+
+[sub_resource type="RectangleShape2D" id="RS_body"]
+size = Vector2(114, 122)
+
+[sub_resource type="RectangleShape2D" id="RS_axe"]
+size = Vector2(54.5, 20)
+
+[sub_resource type="RectangleShape2D" id="RS_floor"]
+size = Vector2(3200, 20)
+
+[sub_resource type="RectangleShape2D" id="RS_exit"]
+size = Vector2(120, 131)
+
+[sub_resource type="RectangleShape2D" id="RS_pm"]
+size = Vector2(200, 250)
+
+[sub_resource type="RectangleShape2D" id="RS_plat"]
+size = Vector2(200, 16)
+
+[node name="Level4" type="Node2D"]
+
+[node name="background" type="Parallax2D" parent="."]
+
+[node name="farlayer" type="ParallaxLayer" parent="background"]
+motion_scale = Vector2(0.2, 0.2)
+
+[node name="Sprite2D" type="Sprite2D" parent="background/farlayer"]
+position = Vector2(525, 362)
+modulate = Color(0.18, 0.06, 0.42, 1)
+texture = ExtResource("1_l4far")
+
+[node name="Sprite2D2" type="Sprite2D" parent="background/farlayer"]
+position = Vector2(1789, 362)
+modulate = Color(0.18, 0.06, 0.42, 1)
+texture = ExtResource("1_l4far")
+
+[node name="Sprite2D3" type="Sprite2D" parent="background/farlayer"]
+position = Vector2(3053, 362)
+modulate = Color(0.18, 0.06, 0.42, 1)
+texture = ExtResource("1_l4far")
+
+[node name="nearlayer" type="ParallaxLayer" parent="background"]
+position = Vector2(46, 521)
+
+[node name="Sprite2D" type="Sprite2D" parent="background/nearlayer"]
+position = Vector2(478.9976, 53)
+scale = Vector2(1.0000038, 0.9114)
+modulate = Color(0.22, 0.06, 0.38, 1)
+texture = ExtResource("2_l4near")
+
+[node name="Player" type="CharacterBody2D" parent="." groups=["player"]]
+position = Vector2(200, 300)
+script = ExtResource("3_l4player")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player"]
+position = Vector2(0, 220)
+scale = Vector2(0.52, 0.52)
+sprite_frames = ExtResource("4_l4pf")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="FuseSprite" type="AnimatedSprite2D" parent="Player"]
+position = Vector2(40, 100)
+scale = Vector2(0.55, 0.55)
+sprite_frames = ExtResource("4_l4ff")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="Axe" type="Sprite2D" parent="Player"]
+position = Vector2(60, 220)
+scale = Vector2(0.08, 0.08)
+texture = ExtResource("5_l4axe")
+
+[node name="forme" type="CollisionShape2D" parent="Player"]
+position = Vector2(3, 227)
+shape = SubResource("RS_body")
+
+[node name="PickaxeHitbox" type="Area2D" parent="Player"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/PickaxeHitbox"]
+position = Vector2(97.25, 227)
+shape = SubResource("RS_axe")
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position = Vector2(0, 182)
+
+[node name="RayCast2D" type="RayCast2D" parent="Player"]
+position = Vector2(75, 253)
+target_position = Vector2(50, 0)
+collision_mask = 2
+collide_with_areas = true
+
+[node name="Floor" type="StaticBody2D" parent="."]
+position = Vector2(1400, 619)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
+shape = SubResource("RS_floor")
+
+[node name="Platform1" type="StaticBody2D" parent="."]
+position = Vector2(350, 475)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform1"]
+position = Vector2(0, -17)
+one_way_collision = true
+shape = SubResource("RS_plat")
+
+[node name="Sprite2D" type="Sprite2D" parent="Platform1"]
+scale = Vector2(0.16355681, 0.08593709)
+texture = ExtResource("12_l4plat")
+
+[node name="Platform2" type="StaticBody2D" parent="."]
+position = Vector2(650, 440)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform2"]
+position = Vector2(0, -17)
+one_way_collision = true
+shape = SubResource("RS_plat")
+
+[node name="Sprite2D" type="Sprite2D" parent="Platform2"]
+scale = Vector2(0.16355681, 0.08593709)
+texture = ExtResource("12_l4plat")
+
+[node name="Platform3" type="StaticBody2D" parent="."]
+position = Vector2(950, 475)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform3"]
+position = Vector2(0, -17)
+one_way_collision = true
+shape = SubResource("RS_plat")
+
+[node name="Sprite2D" type="Sprite2D" parent="Platform3"]
+scale = Vector2(0.16355681, 0.08593709)
+texture = ExtResource("12_l4plat")
+
+[node name="Platform4" type="StaticBody2D" parent="."]
+position = Vector2(1250, 440)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform4"]
+position = Vector2(0, -17)
+one_way_collision = true
+shape = SubResource("RS_plat")
+
+[node name="Sprite2D" type="Sprite2D" parent="Platform4"]
+scale = Vector2(0.16355681, 0.08593709)
+texture = ExtResource("12_l4plat")
+
+[node name="Platform5" type="StaticBody2D" parent="."]
+position = Vector2(1580, 475)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform5"]
+position = Vector2(0, -17)
+one_way_collision = true
+shape = SubResource("RS_plat")
+
+[node name="Sprite2D" type="Sprite2D" parent="Platform5"]
+scale = Vector2(0.16355681, 0.08593709)
+texture = ExtResource("12_l4plat")
+
+[node name="rock1" parent="." instance=ExtResource("7_l4rock")]
+position = Vector2(280, 562)
+
+[node name="rock2" parent="." instance=ExtResource("7_l4rock")]
+position = Vector2(350, 402)
+
+[node name="rock3" parent="." instance=ExtResource("7_l4rock")]
+position = Vector2(500, 562)
+
+[node name="rock4" parent="." instance=ExtResource("7_l4rock")]
+position = Vector2(650, 367)
+
+[node name="rock5" parent="." instance=ExtResource("7_l4rock")]
+position = Vector2(750, 562)
+
+[node name="rock6" parent="." instance=ExtResource("7_l4rock")]
+position = Vector2(950, 402)
+
+[node name="rock7" parent="." instance=ExtResource("7_l4rock")]
+position = Vector2(1050, 562)
+
+[node name="rock8" parent="." instance=ExtResource("7_l4rock")]
+position = Vector2(1250, 367)
+
+[node name="rock9" parent="." instance=ExtResource("7_l4rock")]
+position = Vector2(1400, 562)
+
+[node name="rock10" parent="." instance=ExtResource("7_l4rock")]
+position = Vector2(1580, 402)
+
+[node name="rock11" parent="." instance=ExtResource("7_l4rock")]
+position = Vector2(1750, 562)
+
+[node name="rock12" parent="." instance=ExtResource("15_l4sr")]
+position = Vector2(400, 402)
+
+[node name="rock13" parent="." instance=ExtResource("15_l4sr")]
+position = Vector2(1300, 367)
+
+[node name="Drone1" parent="." instance=ExtResource("10_l4drone")]
+position = Vector2(380, 435)
+
+[node name="Drone2" parent="." instance=ExtResource("10_l4drone")]
+position = Vector2(750, 400)
+
+[node name="Drone3" parent="." instance=ExtResource("10_l4drone")]
+position = Vector2(1150, 435)
+
+[node name="Drone4" parent="." instance=ExtResource("10_l4drone")]
+position = Vector2(1650, 400)
+
+[node name="PrimeMourk" type="StaticBody2D" parent="."]
+position = Vector2(2100, 490)
+collision_layer = 2
+script = ExtResource("13_l4pm")
+
+[node name="Sprite2D" type="Sprite2D" parent="PrimeMourk"]
+scale = Vector2(0.22, 0.22)
+texture = ExtResource("14_l4pm_tex")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PrimeMourk"]
+shape = SubResource("RS_pm")
+
+[node name="LevelExit" type="Area2D" parent="."]
+position = Vector2(2800, 680)
+script = ExtResource("11_l4exit")
+next_scene = "res://win_screen.tscn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelExit"]
+position = Vector2(0, -15.5)
+shape = SubResource("RS_exit")
+
+[node name="Sprite2D" type="Sprite2D" parent="LevelExit"]
+position = Vector2(-6.0, -61.0)
+scale = Vector2(0.168, 0.109)
+texture = ExtResource("12_l4plat")
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_l4music")
+volume_db = -6.0
+autoplay = true
+
+[node name="TouchControls" parent="." instance=ExtResource("0_l4touch")]
+
+[node name="HUD" type="CanvasLayer" parent="."]
+script = ExtResource("6_l4hud")
+
+[node name="ShardIcon" type="TextureRect" parent="HUD"]
+offset_left = 15.0
+offset_top = 15.0
+offset_right = 47.0
+offset_bottom = 36.0
+texture = ExtResource("9_l4si")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="ShardLabel" type="Label" parent="HUD"]
+offset_left = 55.0
+offset_top = 10.0
+offset_right = 250.0
+offset_bottom = 45.0
+theme_override_colors/font_color = Color(0.9098039, 0.7882353, 0.3019608, 1)
+theme_override_font_sizes/font_size = 26
+text = "x 0"
+
+[node name="HealthLabel" type="Label" parent="HUD"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -250.0
+offset_top = 10.0
+offset_right = -15.0
+offset_bottom = 45.0
+theme_override_colors/font_color = Color(0.4, 0.85, 0.9, 1)
+theme_override_font_sizes/font_size = 28
+text = "♦ ♦ ♦"
+horizontal_alignment = 2
+
+[node name="LivesLabel" type="Label" parent="HUD"]
+anchor_left = 1.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 0.0
+offset_left = -250.0
+offset_top = 48.0
+offset_right = -15.0
+offset_bottom = 80.0
+theme_override_colors/font_color = Color(0.9, 0.3, 1.0, 1)
+theme_override_font_sizes/font_size = 22
+text = ""
+horizontal_alignment = 2

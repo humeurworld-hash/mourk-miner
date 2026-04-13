@@ -8,5 +8,7 @@ func _ready() -> void:
 func _on_body_entered(body: Node) -> void:
 	if body.is_in_group("player"):
 		GameState.save()
-		# Must defer — can't remove CollisionObjects during a physics callback
-		get_tree().call_deferred("change_scene_to_file", next_scene)
+		TransitionLayer.fade_out(
+			func(): get_tree().call_deferred("change_scene_to_file", next_scene),
+			0.5
+		)
