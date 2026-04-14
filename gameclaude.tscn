@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://b0uuaa3shw8mu"]
 
 [ext_resource type="PackedScene" path="res://touch_controls.tscn" id="0_touch"]
-[ext_resource type="PackedScene" path="res://chest.tscn" id="chest_scene"]
 [ext_resource type="Script" uid="uid://dp6vls7m6rpgi" path="res://player.gd" id="4_jep2d"]
 [ext_resource type="SpriteFrames" uid="uid://c7ronklbxhj4o" path="res://fuse_frames.tres" id="5_fframes"]
 [ext_resource type="SpriteFrames" uid="uid://dgco3rqfqmgyb" path="res://player_frames.tres" id="5_pframes"]
@@ -23,7 +22,8 @@
 [ext_resource type="Texture2D" uid="uid://bexa4tk6muxfh" path="res://echoveil/backgrounds/Background update/Untitled_Artwork-5.png" id="bg5_gc"]
 [ext_resource type="Texture2D" uid="uid://bt5s2yeo02jif" path="res://echoveil/backgrounds/Background update/Untitled_Artwork-6.png" id="bg6_gc"]
 [ext_resource type="Texture2D" uid="uid://ba0v157kmp0ca" path="res://echoveil/backgrounds/Background update/Untitled_Artwork-7.png" id="bg7_gc"]
-[ext_resource type="Texture2D" uid="uid://cw1wyoi6ixc0a" path="res://echoveil/platforms/IMG_2812 2.png" id="plat_tex"]
+[ext_resource type="PackedScene" path="res://chest.tscn" id="chest_scene"]
+[ext_resource type="Texture2D" uid="uid://cw1wyoi6ixc0a" path="res://echoveil/platforms/Platforms and mourks /IMG_2812 2.png" id="plat_tex"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e2o6t"]
 size = Vector2(114, 122)
@@ -53,14 +53,14 @@ atlas = ExtResource("16_cliff")
 region = Rect2(661, 745, 250, 155)
 
 [sub_resource type="RectangleShape2D" id="RS_smallplat"]
-size = Vector2(261, 38)
+size = Vector2(104.16667, 38)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tw763"]
-size = Vector2(1342, 16.25)
+size = Vector2(1342, 23.5)
 
 [node name="Game" type="Node2D" unique_id=1161058939]
 
-[node name="background" type="Parallax2D" parent="." unique_id=1000006517]
+[node name="background" type="ParallaxBackground" parent="." unique_id=1000006517]
 
 [node name="layer1" type="ParallaxLayer" parent="background" unique_id=1199886161]
 motion_scale = Vector2(0.05, 0)
@@ -74,7 +74,7 @@ texture = ExtResource("bg1_gc")
 motion_scale = Vector2(0.15, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="background/layer2" unique_id=74516611]
-position = Vector2(1401.5, 380)
+position = Vector2(1351.9999, 261)
 scale = Vector2(0.5449078, 1)
 texture = ExtResource("bg2_gc")
 
@@ -99,7 +99,7 @@ texture = ExtResource("bg4_gc")
 motion_scale = Vector2(0.58, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="background/layer5" unique_id=566265174]
-position = Vector2(1452.75, 561)
+position = Vector2(1458, 517)
 scale = Vector2(0.56614935, 1)
 texture = ExtResource("bg5_gc")
 
@@ -107,7 +107,7 @@ texture = ExtResource("bg5_gc")
 motion_scale = Vector2(0.75, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="background/layer6" unique_id=1305148847]
-position = Vector2(1311, 239.50003)
+position = Vector2(1316.0001, 160)
 scale = Vector2(0.5761397, 0.8053031)
 texture = ExtResource("bg6_gc")
 
@@ -307,13 +307,14 @@ texture = SubResource("AT_gccliff")
 position = Vector2(430, 490)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Platform1" unique_id=215449724]
-position = Vector2(1669, -292)
+position = Vector2(1682, -348)
+scale = Vector2(2, 1)
 shape = SubResource("RS_smallplat")
 one_way_collision = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Platform1" unique_id=564052966]
-position = Vector2(1662, -321)
-scale = Vector2(0.39329532, 0.12798634)
+position = Vector2(1678, -383.00003)
+scale = Vector2(0.34995908, 0.12798634)
 texture = ExtResource("plat_tex")
 
 [node name="Platform2" type="StaticBody2D" parent="." unique_id=1933470361]
@@ -333,53 +334,67 @@ texture = ExtResource("plat_tex")
 position = Vector2(760, 470)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Platform3" unique_id=1694743221]
-position = Vector2(1066.5, -209)
+position = Vector2(1064, -251)
 shape = SubResource("RS_smallplat")
 one_way_collision = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Platform3" unique_id=1940605146]
-position = Vector2(1061.5, -234.00002)
-scale = Vector2(0.38511848, 0.08593709)
+position = Vector2(1061, -276)
+scale = Vector2(0.18233848, 0.08593709)
+texture = ExtResource("plat_tex")
+
+[node name="Platform 4" type="StaticBody2D" parent="Platform3" unique_id=783519919]
+position = Vector2(760, 470)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform3/Platform 4" unique_id=576045729]
+position = Vector2(-1159.75, -734)
+scale = Vector2(3, 1)
+shape = SubResource("RS_smallplat")
+one_way_collision = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Platform3/Platform 4" unique_id=206262345]
+position = Vector2(-1164, -742)
+scale = Vector2(0.4799673, 0.236)
 texture = ExtResource("plat_tex")
 
 [node name="LedgePlatform" type="StaticBody2D" parent="." unique_id=790426750]
 position = Vector2(1520, 401.875)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LedgePlatform" unique_id=421406606]
+position = Vector2(1, -72.625)
 shape = SubResource("RectangleShape2D_tw763")
 one_way_collision = true
 
 [node name="Sprite2D" type="Sprite2D" parent="LedgePlatform" unique_id=783664545]
-position = Vector2(-31.499966, 3.1249924)
+position = Vector2(-53.99996, -44.875008)
 scale = Vector2(2.1234667, 0.1558098)
-texture = ExtResource("plat_tex")
 
 [node name="ledge_rock1" parent="." unique_id=2147212760 instance=ExtResource("8_7eaep")]
-position = Vector2(900, 347)
+position = Vector2(905, 272)
 
 [node name="ledge_rock2" parent="." unique_id=562213809 instance=ExtResource("8_7eaep")]
-position = Vector2(1050, 347)
+position = Vector2(1055, 272)
 
 [node name="ledge_rock3" parent="." unique_id=171263665 instance=ExtResource("8_7eaep")]
-position = Vector2(1200, 347)
+position = Vector2(1205, 272)
 
 [node name="ledge_rock4" parent="." unique_id=1443570895 instance=ExtResource("14_sr")]
-position = Vector2(1350, 347)
+position = Vector2(1355, 272)
 
 [node name="ledge_rock5" parent="." unique_id=1335887940 instance=ExtResource("8_7eaep")]
-position = Vector2(1500, 347)
+position = Vector2(1505, 272)
 
 [node name="ledge_rock6" parent="." unique_id=1843143147 instance=ExtResource("8_7eaep")]
-position = Vector2(1650, 347)
+position = Vector2(1655, 272)
 
 [node name="ledge_rock7" parent="." unique_id=1817702260 instance=ExtResource("8_7eaep")]
-position = Vector2(1800, 347)
+position = Vector2(1805, 272)
 
 [node name="ledge_rock8" parent="." unique_id=2142682069 instance=ExtResource("8_7eaep")]
-position = Vector2(1950, 347)
+position = Vector2(1955, 272)
 
 [node name="ledge_rock9" parent="." unique_id=1060865222 instance=ExtResource("14_sr")]
-position = Vector2(2100, 347)
+position = Vector2(2105, 272)
 
-[node name="Chest" parent="." instance=ExtResource("chest_scene")]
-position = Vector2(2050, 310)
+[node name="Chest" parent="." unique_id=1251933787 instance=ExtResource("chest_scene")]
+position = Vector2(2166, 42)

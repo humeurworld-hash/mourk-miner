@@ -1,6 +1,6 @@
 extends CanvasLayer
 
-# Pixel crop bounds for each number image (x, y, w, h) on 1536x1024 canvas
+# Pixel crop bounds (x, y, w, h) for each digit image 0-9
 const NUM_REGIONS = [
 	[183, 206, 163, 186],  # 0
 	[454, 207, 124, 185],  # 1
@@ -12,47 +12,58 @@ const NUM_REGIONS = [
 	[684, 553, 147, 180],  # 7
 	[1201, 552, 166, 181], # 8
 	[944, 555, 199, 177],  # 9
-	[139, 806, 249, 181],  # 10
 ]
 
-var _num_textures: Array = []
-var _num_rect: TextureRect = null
+var _digit_textures: Array = []
+var _digit_rects: Array = []
 
 func _ready() -> void:
 	TransitionLayer.fade_in(0.5)
 
-	# Build cropped AtlasTexture for each digit
-	for i in range(11):
+	# Load cropped AtlasTexture for each digit 0-9
+	for i in range(10):
 		var img = load("res://echoveil/UI/mourk counter/numbers/Numbers/" + str(i) + ".png")
 		var at = AtlasTexture.new()
 		at.atlas = img
 		var b = NUM_REGIONS[i]
 		at.region = Rect2(b[0], b[1], b[2], b[3])
-		_num_textures.append(at)
+		_digit_textures.append(at)
 
-	# Hide text label — replaced by image number
+	# Hide old text label
 	$ShardLabel.visible = false
 
-	# Number display overlaid on the blank area of the mourk counter tablet
-	# (ShardIcon spans offset 10→254 / 8→88; blank rect is right 55% of that)
-	_num_rect = TextureRect.new()
-	_num_rect.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-	_num_rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-	_num_rect.offset_left = 128.0
-	_num_rect.offset_top = 16.0
-	_num_rect.offset_right = 250.0
-	_num_rect.offset_bottom = 86.0
-	add_child(_num_rect)
+	# Three digit rects: hundreds | tens | units
+	# Fitted into the blank area of the mourk counter tablet (offset ~128→250)
+	var lefts  = [128.0, 163.0, 204.0]
+	var rights = [161.0, 202.0, 250.0]
+	for i in 3:
+		var r = TextureRect.new()
+		r.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		r.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+		r.offset_left   = lefts[i]
+		r.offset_top    = 16.0
+		r.offset_right  = rights[i]
+		r.offset_bottom = 86.0
+		add_child(r)
+		_digit_rects.append(r)
 
 func _process(_delta: float) -> void:
 	var player = get_tree().get_first_node_in_group("player")
 	if not player:
 		return
 
-	# Number image counter
-	var count = clamp(player.shards_collected, 0, 10)
-	if _num_rect:
-		_num_rect.texture = _num_textures[count]
+	# Composite digit display — no cap
+	var count = max(0, player.shards_collected)
+	var digits = [count / 100, (count / 10) % 10, count % 10]
+	var leading := true
+	for i in 3:
+		var is_leading_zero = leading and digits[i] == 0 and i < 2
+		if is_leading_zero:
+			_digit_rects[i].visible = false
+		else:
+			leading = false
+			_digit_rects[i].visible = true
+			_digit_rects[i].texture = _digit_textures[digits[i]]
 
 	# Health crystals
 	var health = player.health
@@ -60,13 +71,13 @@ func _process(_delta: float) -> void:
 	$HealthShard2.visible = health >= 2
 	$HealthShard3.visible = health >= 3
 
-	# Lives display + Break indicator
+	# Lives / break indicator
 	var lives = GameState.lives
 	if lives >= 3:
 		$LivesLabel.text = "♦ BREAK"
 		$LivesLabel.add_theme_color_override("font_color", Color(1.0, 0.0, 1.0, 1.0))
 	else:
-		var lives_str = ""
+		var lives_str := ""
 		for i in range(lives):
 			lives_str += "♦ "
 		$LivesLabel.text = lives_str.strip_edges()
