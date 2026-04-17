@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://clm1o21yas1rp"
-path="res://.godot/imported/76D2A5B2-6585-4555-8C6B-C6D25CF6C6CD-6.png-afc9ef119d4739837fc8147151a0d6b7.ctex"
+uid="uid://b71chqxhot6gx"
+path="res://.godot/imported/ledge 1.png-e60d2a6f5ce7f97575f7f62400fbcbf9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://echoveil/platforms/Platforms and mourks /76D2A5B2-6585-4555-8C6B-C6D25CF6C6CD-6.png"
-dest_files=["res://.godot/imported/76D2A5B2-6585-4555-8C6B-C6D25CF6C6CD-6.png-afc9ef119d4739837fc8147151a0d6b7.ctex"]
+source_file="res://echoveil/platforms/Platforms and mourks /ledge 1.png"
+dest_files=["res://.godot/imported/ledge 1.png-e60d2a6f5ce7f97575f7f62400fbcbf9.ctex"]
 
 [params]
 

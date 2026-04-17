@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://j6pkrhwqaemw"
-path="res://.godot/imported/26BD4AED-AB96-4AD0-B798-DAE0D240A86D.png-5cb8e20606ff0cc642caacad2fb70b36.ctex"
+uid="uid://bkwoert0mkm07"
+path="res://.godot/imported/Non playable .png-8cf95b32f9b75a063b54b88c112a20fa.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://echoveil/platforms/Rocks/26BD4AED-AB96-4AD0-B798-DAE0D240A86D.png"
-dest_files=["res://.godot/imported/26BD4AED-AB96-4AD0-B798-DAE0D240A86D.png-5cb8e20606ff0cc642caacad2fb70b36.ctex"]
+source_file="res://echoveil/platforms/Rocks and chest/chest/Chest/Non playable .png"
+dest_files=["res://.godot/imported/Non playable .png-8cf95b32f9b75a063b54b88c112a20fa.ctex"]
 
 [params]
 

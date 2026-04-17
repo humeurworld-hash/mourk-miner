@@ -1,6 +1,7 @@
 [gd_scene format=3]
 
 [ext_resource type="Script" path="res://chest.gd" id="1_script"]
+[ext_resource type="AudioStream" path="res://echoveil/music/animations/chest opening.mp3" id="7_sound"]
 [ext_resource type="Texture2D" path="res://echoveil/platforms/Rocks and chest/chest/Chest/Empty.png" id="2_empty"]
 [ext_resource type="Texture2D" path="res://echoveil/platforms/Rocks and chest/chest/Chest/Slightly open.png" id="3_slight"]
 [ext_resource type="Texture2D" path="res://echoveil/platforms/Rocks and chest/chest/Chest/Peeking.png" id="4_peek"]
@@ -60,3 +61,7 @@ autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RS_chest")
+
+[node name="OpenSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_sound")
+volume_db = 0.0

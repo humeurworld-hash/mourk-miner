@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cvkjl5w0rnr51"]
 
 [ext_resource type="Script" uid="uid://bblbruetk7rb7" path="res://rock.gd" id="1_68h2w"]
-[ext_resource type="Texture2D" uid="uid://j6pkrhwqaemw" path="res://echoveil/platforms/Rocks/26BD4AED-AB96-4AD0-B798-DAE0D240A86D.png" id="2_wecdg"]
+[ext_resource type="Texture2D" path="res://echoveil/platforms/Rocks and chest/Rock.png" id="2_wecdg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_46y1q"]
 size = Vector2(108, 96)
