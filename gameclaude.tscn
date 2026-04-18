@@ -23,14 +23,28 @@
 [ext_resource type="Texture2D" uid="uid://ba0v157kmp0ca" path="res://echoveil/backgrounds/Background update/Untitled_Artwork-7.png" id="bg7_gc"]
 [ext_resource type="Texture2D" uid="uid://cw1wyoi6ixc0a" path="res://echoveil/platforms/Platforms and mourks /IMG_2812 2.png" id="plat_tex"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_e2o6t"]
+; Player collision: local (4, 248), half-h=61 → feet = player.y + 309
+; Floor top = 570, so player.y = 570 - 309 = 261
+; Rock half-h=48, sits on floor: rock.y = 570 - 48 = 522
+; Platform top=450 → reachable (jump lifts feet to y=261+309-184=386, 386<450 ✓)
+
+[sub_resource type="RectangleShape2D" id="shape_player"]
 size = Vector2(114, 122)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_eow3j"]
+[sub_resource type="RectangleShape2D" id="shape_axe"]
 size = Vector2(54.5, 20)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_floor"]
-size = Vector2(2927, 20)
+[sub_resource type="RectangleShape2D" id="shape_floor"]
+size = Vector2(3000, 20)
+
+[sub_resource type="RectangleShape2D" id="shape_plat"]
+size = Vector2(208, 38)
+
+[sub_resource type="RectangleShape2D" id="shape_exit"]
+size = Vector2(111, 38)
+
+[sub_resource type="RectangleShape2D" id="shape_wall"]
+size = Vector2(30, 700)
 
 [sub_resource type="AtlasTexture" id="AT_gc_mc"]
 atlas = ExtResource("17_gc_mc")
@@ -40,18 +54,9 @@ region = Rect2(120, 399, 697, 229)
 atlas = ExtResource("18_gc_ls")
 region = Rect2(913, 413, 119, 230)
 
-[sub_resource type="RectangleShape2D" id="RS_exit"]
-size = Vector2(111, 38)
-
-[sub_resource type="RectangleShape2D" id="RS_wall"]
-size = Vector2(30, 700)
-
 [sub_resource type="AtlasTexture" id="AT_cliff"]
 atlas = ExtResource("16_cliff")
 region = Rect2(661, 745, 250, 155)
-
-[sub_resource type="RectangleShape2D" id="RS_plat"]
-size = Vector2(208, 38)
 
 [node name="Game" type="Node2D"]
 
@@ -109,7 +114,7 @@ scale = Vector2(0.5702231, 1)
 texture = ExtResource("bg7_gc")
 
 [node name="Player" type="CharacterBody2D" parent="." groups=["player"]]
-position = Vector2(150, 300)
+position = Vector2(150, 261)
 script = ExtResource("4_jep2d")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player"]
@@ -133,16 +138,18 @@ texture = ExtResource("9_axe")
 
 [node name="forme" type="CollisionShape2D" parent="Player"]
 position = Vector2(4, 248)
-shape = SubResource("RectangleShape2D_e2o6t")
+shape = SubResource("shape_player")
 
 [node name="PickaxeHitbox" type="Area2D" parent="Player"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player/PickaxeHitbox"]
 position = Vector2(97.25, 227)
-shape = SubResource("RectangleShape2D_eow3j")
+shape = SubResource("shape_axe")
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(0, 182)
+position_smoothing_enabled = true
+position_smoothing_speed = 8.0
 
 [node name="RayCast2D" type="RayCast2D" parent="Player"]
 position = Vector2(75, 253)
@@ -151,11 +158,55 @@ collision_mask = 2
 collide_with_areas = true
 
 [node name="Floor" type="StaticBody2D" parent="."]
-position = Vector2(1405, 619)
+position = Vector2(0, 580)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
-position = Vector2(58.5, 0)
-shape = SubResource("RectangleShape2D_floor")
+position = Vector2(576, 0)
+shape = SubResource("shape_floor")
+
+[node name="rock" parent="." instance=ExtResource("8_7eaep")]
+position = Vector2(450, 522)
+
+[node name="Drone1" parent="." instance=ExtResource("13_drone")]
+position = Vector2(700, 450)
+
+[node name="Platform1" type="StaticBody2D" parent="."]
+position = Vector2(600, 469)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform1"]
+position = Vector2(104, 0)
+shape = SubResource("shape_plat")
+one_way_collision = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Platform1"]
+position = Vector2(104, -26)
+scale = Vector2(0.33, 0.086)
+texture = ExtResource("plat_tex")
+
+[node name="LevelExit" type="Area2D" parent="."]
+position = Vector2(900, 560)
+script = ExtResource("10_exit")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelExit"]
+position = Vector2(53.5, 6)
+shape = SubResource("shape_exit")
+
+[node name="Sprite2D" type="Sprite2D" parent="LevelExit"]
+position = Vector2(45.6, -5.0)
+scale = Vector2(0.15807287, 0.15664063)
+texture = ExtResource("15_hole")
+
+[node name="LevelWall" type="StaticBody2D" parent="."]
+position = Vector2(1100, 580)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelWall"]
+position = Vector2(-85, -345)
+shape = SubResource("shape_wall")
+
+[node name="Sprite2D" type="Sprite2D" parent="LevelWall"]
+position = Vector2(16, -89)
+scale = Vector2(0.96599996, 0.982258)
+texture = SubResource("AT_cliff")
 
 [node name="HUD" type="CanvasLayer" parent="."]
 script = ExtResource("7_05srh")
@@ -235,49 +286,6 @@ theme_override_colors/font_color = Color(0.9, 0.3, 1, 1)
 theme_override_font_sizes/font_size = 20
 horizontal_alignment = 2
 metadata/_edit_use_anchors_ = true
-
-[node name="rock" parent="." instance=ExtResource("8_7eaep")]
-position = Vector2(500, 561)
-
-[node name="Drone1" parent="." instance=ExtResource("13_drone")]
-position = Vector2(750, 490)
-
-[node name="Platform1" type="StaticBody2D" parent="."]
-position = Vector2(620, 469)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform1"]
-shape = SubResource("RS_plat")
-one_way_collision = true
-
-[node name="Sprite2D" type="Sprite2D" parent="Platform1"]
-position = Vector2(0, -26)
-scale = Vector2(0.33, 0.086)
-texture = ExtResource("plat_tex")
-
-[node name="LevelExit" type="Area2D" parent="."]
-position = Vector2(950, 609)
-script = ExtResource("10_exit")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelExit"]
-position = Vector2(53.5, 6)
-shape = SubResource("RS_exit")
-
-[node name="Sprite2D" type="Sprite2D" parent="LevelExit"]
-position = Vector2(45.6, -5.0)
-scale = Vector2(0.15807287, 0.15664063)
-texture = ExtResource("15_hole")
-
-[node name="LevelWall" type="StaticBody2D" parent="."]
-position = Vector2(1150, 619)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelWall"]
-position = Vector2(-85, -345)
-shape = SubResource("RS_wall")
-
-[node name="Sprite2D" type="Sprite2D" parent="LevelWall"]
-position = Vector2(16, -89)
-scale = Vector2(0.96599996, 0.982258)
-texture = SubResource("AT_cliff")
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("11_music")
