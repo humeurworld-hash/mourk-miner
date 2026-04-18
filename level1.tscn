@@ -123,6 +123,9 @@ shape = SubResource("s_axe")
 position = Vector2(0, 182)
 position_smoothing_enabled = true
 position_smoothing_speed = 8.0
+drag_vertical_enabled = true
+drag_top_margin = 0.5
+drag_bottom_margin = 0.5
 
 [node name="RayCast2D" type="RayCast2D" parent="Player"]
 position = Vector2(75, 253)
