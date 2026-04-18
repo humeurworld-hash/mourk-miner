@@ -60,20 +60,20 @@ size = Vector2(1342, 23.5)
 
 [node name="Game" type="Node2D" unique_id=1161058939]
 
-[node name="background" type="ParallaxBackground" parent="." unique_id=1000006517]
+[node name="background" type="CanvasLayer" parent="." unique_id=1000006517]
+layer = -1
 
 [node name="layer1" type="Node2D" parent="background" unique_id=1199886161]
-position = Vector2(2, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="background/layer1" unique_id=1347840160]
-position = Vector2(1454.25, 127)
+position = Vector2(576, 324)
 scale = Vector2(0.56595534, 1)
 texture = ExtResource("bg1_gc")
 
 [node name="layer2" type="Node2D" parent="background" unique_id=337948030]
 
 [node name="Sprite2D" type="Sprite2D" parent="background/layer2" unique_id=74516611]
-position = Vector2(1351.9999, 261)
+position = Vector2(576, 324)
 scale = Vector2(0.5449078, 1)
 texture = ExtResource("bg2_gc")
 
@@ -81,35 +81,35 @@ texture = ExtResource("bg2_gc")
 
 [node name="Sprite2D" type="Sprite2D" parent="background/layer3" unique_id=347034113]
 modulate = Color(1, 1, 1, 0.65)
-position = Vector2(1398.25, 450)
+position = Vector2(576, 324)
 scale = Vector2(0.542677, 1)
 texture = ExtResource("bg3_gc")
 
 [node name="layer4" type="Node2D" parent="background" unique_id=23088398]
 
 [node name="Sprite2D" type="Sprite2D" parent="background/layer4" unique_id=566403662]
-position = Vector2(1407.75, 550)
+position = Vector2(576, 324)
 scale = Vector2(0.54636276, 1)
 texture = ExtResource("bg4_gc")
 
 [node name="layer5" type="Node2D" parent="background" unique_id=125882652]
 
 [node name="Sprite2D" type="Sprite2D" parent="background/layer5" unique_id=566265174]
-position = Vector2(1458, 517)
+position = Vector2(576, 324)
 scale = Vector2(0.56614935, 1)
 texture = ExtResource("bg5_gc")
 
 [node name="layer6" type="Node2D" parent="background" unique_id=495460802]
 
 [node name="Sprite2D" type="Sprite2D" parent="background/layer6" unique_id=1305148847]
-position = Vector2(1316.0001, 160)
+position = Vector2(576, 324)
 scale = Vector2(0.5761397, 0.8053031)
 texture = ExtResource("bg6_gc")
 
 [node name="nearlayer" type="Node2D" parent="background" unique_id=1278689398]
 
 [node name="Sprite2D" type="Sprite2D" parent="background/nearlayer" unique_id=1231864662]
-position = Vector2(1456.2501, 412)
+position = Vector2(576, 324)
 scale = Vector2(0.5702231, 1)
 texture = ExtResource("bg7_gc")
 

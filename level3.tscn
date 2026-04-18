@@ -49,13 +49,14 @@ region = Rect2(913, 413, 119, 230)
 
 [node name="Game" type="Node2D"]
 
-[node name="background" type="ParallaxBackground" parent="."]
+[node name="background" type="CanvasLayer" parent="."]
+layer = -1
 modulate = Color(0.62, 0.52, 0.92, 1.0)
 
 [node name="layer_far" type="Node2D" parent="background"]
 
 [node name="Sprite2D" type="Sprite2D" parent="background/layer_far"]
-position = Vector2(1454.25, 127)
+position = Vector2(576, 324)
 scale = Vector2(0.56595534, 1)
 texture = ExtResource("bg1")
 
@@ -63,21 +64,21 @@ texture = ExtResource("bg1")
 
 [node name="Sprite2D" type="Sprite2D" parent="background/layer_mid1"]
 modulate = Color(1, 1, 1, 0.65)
-position = Vector2(1398.25, 450)
+position = Vector2(576, 324)
 scale = Vector2(0.542677, 1)
 texture = ExtResource("bg3")
 
 [node name="layer_mid2" type="Node2D" parent="background"]
 
 [node name="Sprite2D" type="Sprite2D" parent="background/layer_mid2"]
-position = Vector2(1458, 517)
+position = Vector2(576, 324)
 scale = Vector2(0.56614935, 1)
 texture = ExtResource("bg5")
 
 [node name="layer_near" type="Node2D" parent="background"]
 
 [node name="Sprite2D" type="Sprite2D" parent="background/layer_near"]
-position = Vector2(1456.2501, 412)
+position = Vector2(576, 324)
 scale = Vector2(0.5702231, 1)
 texture = ExtResource("bg7")
 
