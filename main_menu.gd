@@ -166,7 +166,7 @@ func _on_continue() -> void:
 	can_interact = false
 	GameState.load_data()
 	TransitionLayer.fade_out(
-		func(): get_tree().change_scene_to_file("res://gameclaude.tscn"),
+		func(): get_tree().change_scene_to_file("res://level1.tscn"),
 		0.5
 	)
 
@@ -177,6 +177,6 @@ func _on_new_game() -> void:
 	GameState.reset()
 	GameState.save()
 	TransitionLayer.fade_out(
-		func(): get_tree().change_scene_to_file("res://gameclaude.tscn"),
+		func(): get_tree().change_scene_to_file("res://level1.tscn"),
 		0.5
 	)

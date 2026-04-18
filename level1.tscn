@@ -1,0 +1,254 @@
+[gd_scene format=3 uid="uid://level1_clean"]
+
+[ext_resource type="PackedScene" path="res://touch_controls.tscn" id="0_touch"]
+[ext_resource type="Script" uid="uid://dp6vls7m6rpgi" path="res://player.gd" id="1_player"]
+[ext_resource type="SpriteFrames" uid="uid://c7ronklbxhj4o" path="res://fuse_frames.tres" id="2_fframes"]
+[ext_resource type="SpriteFrames" uid="uid://dgco3rqfqmgyb" path="res://player_frames.tres" id="3_pframes"]
+[ext_resource type="Script" uid="uid://uewak7cunake" path="res://hud.gd" id="4_hud"]
+[ext_resource type="PackedScene" uid="uid://cvkjl5w0rnr51" path="res://rock.tscn" id="5_rock"]
+[ext_resource type="Texture2D" uid="uid://d2skcubfsp1m" path="res://echoveil/forme/Glowing fantasy battle axe design.png" id="6_axe"]
+[ext_resource type="Script" uid="uid://dwkpblhyl2ow0" path="res://level_exit.gd" id="7_exit"]
+[ext_resource type="AudioStream" uid="uid://wjgw140fk230" path="res://echoveil/music/Mist in the Circuit-2.mp3" id="8_music"]
+[ext_resource type="PackedScene" path="res://drone.tscn" id="9_drone"]
+[ext_resource type="Texture2D" uid="uid://db1t01ixuywr1" path="res://echoveil/platforms/holes exits/hole exits new.PNG" id="10_hole"]
+[ext_resource type="Texture2D" uid="uid://f0lwj0rbq0qt" path="res://echoveil/UI/mourk counter/220E297F-BA40-4195-9E91-D295DD553BA9-2.png" id="11_mc"]
+[ext_resource type="Texture2D" uid="uid://5h85q5nijjse" path="res://echoveil/UI/Life shards/220E297F-BA40-4195-9E91-D295DD553BA9-1.png" id="12_ls"]
+[ext_resource type="Texture2D" uid="uid://c8qfs52us3dj4" path="res://echoveil/backgrounds/Background update/Untitled_Artwork-1.png" id="bg1"]
+[ext_resource type="Texture2D" uid="uid://da17pt11uyaod" path="res://echoveil/backgrounds/Background update/Untitled_Artwork-2.png" id="bg2"]
+[ext_resource type="Texture2D" uid="uid://csv32kjn58po0" path="res://echoveil/backgrounds/Background update/Untitled_Artwork-3.png" id="bg3"]
+[ext_resource type="Texture2D" uid="uid://dxir13jphtt46" path="res://echoveil/backgrounds/Background update/Untitled_Artwork-4.png" id="bg4"]
+[ext_resource type="Texture2D" uid="uid://bexa4tk6muxfh" path="res://echoveil/backgrounds/Background update/Untitled_Artwork-5.png" id="bg5"]
+[ext_resource type="Texture2D" uid="uid://bt5s2yeo02jif" path="res://echoveil/backgrounds/Background update/Untitled_Artwork-6.png" id="bg6"]
+[ext_resource type="Texture2D" uid="uid://ba0v157kmp0ca" path="res://echoveil/backgrounds/Background update/Untitled_Artwork-7.png" id="bg7"]
+[ext_resource type="Texture2D" uid="uid://cw1wyoi6ixc0a" path="res://echoveil/platforms/Platforms and mourks /IMG_2812 2.png" id="plat_tex"]
+
+[sub_resource type="RectangleShape2D" id="s_player"]
+size = Vector2(114, 122)
+
+[sub_resource type="RectangleShape2D" id="s_axe"]
+size = Vector2(54.5, 20)
+
+[sub_resource type="RectangleShape2D" id="s_floor"]
+size = Vector2(3000, 20)
+
+[sub_resource type="RectangleShape2D" id="s_plat"]
+size = Vector2(200, 20)
+
+[sub_resource type="RectangleShape2D" id="s_exit"]
+size = Vector2(111, 38)
+
+[sub_resource type="AtlasTexture" id="at_mc"]
+atlas = ExtResource("11_mc")
+region = Rect2(120, 399, 697, 229)
+
+[sub_resource type="AtlasTexture" id="at_ls"]
+atlas = ExtResource("12_ls")
+region = Rect2(913, 413, 119, 230)
+
+[node name="Level1" type="Node2D"]
+
+[node name="Background" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="bg1" type="Sprite2D" parent="Background"]
+position = Vector2(576, 324)
+scale = Vector2(0.566, 1)
+texture = ExtResource("bg1")
+
+[node name="bg2" type="Sprite2D" parent="Background"]
+position = Vector2(576, 324)
+scale = Vector2(0.545, 1)
+texture = ExtResource("bg2")
+
+[node name="bg3" type="Sprite2D" parent="Background"]
+modulate = Color(1, 1, 1, 0.65)
+position = Vector2(576, 324)
+scale = Vector2(0.543, 1)
+texture = ExtResource("bg3")
+
+[node name="bg4" type="Sprite2D" parent="Background"]
+position = Vector2(576, 324)
+scale = Vector2(0.546, 1)
+texture = ExtResource("bg4")
+
+[node name="bg5" type="Sprite2D" parent="Background"]
+position = Vector2(576, 324)
+scale = Vector2(0.566, 1)
+texture = ExtResource("bg5")
+
+[node name="bg6" type="Sprite2D" parent="Background"]
+position = Vector2(576, 324)
+scale = Vector2(0.576, 0.805)
+texture = ExtResource("bg6")
+
+[node name="bg7" type="Sprite2D" parent="Background"]
+position = Vector2(576, 324)
+scale = Vector2(0.570, 1)
+texture = ExtResource("bg7")
+
+[node name="Player" type="CharacterBody2D" parent="." groups=["player"]]
+position = Vector2(200, 291)
+script = ExtResource("1_player")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player"]
+position = Vector2(4, 243)
+scale = Vector2(0.52, 0.52)
+sprite_frames = ExtResource("3_pframes")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="FuseSprite" type="AnimatedSprite2D" parent="Player"]
+position = Vector2(40, 100)
+scale = Vector2(0.36, 0.36)
+sprite_frames = ExtResource("2_fframes")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="Axe" type="Sprite2D" parent="Player"]
+position = Vector2(60, 220)
+scale = Vector2(0.08, 0.08)
+texture = ExtResource("6_axe")
+
+[node name="forme" type="CollisionShape2D" parent="Player"]
+position = Vector2(4, 248)
+shape = SubResource("s_player")
+
+[node name="PickaxeHitbox" type="Area2D" parent="Player"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/PickaxeHitbox"]
+position = Vector2(97.25, 227)
+shape = SubResource("s_axe")
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position = Vector2(0, 182)
+position_smoothing_enabled = true
+position_smoothing_speed = 8.0
+
+[node name="RayCast2D" type="RayCast2D" parent="Player"]
+position = Vector2(75, 253)
+target_position = Vector2(50, 0)
+collision_mask = 2
+collide_with_areas = true
+
+[node name="Floor" type="StaticBody2D" parent="."]
+position = Vector2(576, 610)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
+shape = SubResource("s_floor")
+
+[node name="Rock" parent="." instance=ExtResource("5_rock")]
+position = Vector2(500, 552)
+
+[node name="Drone" parent="." instance=ExtResource("9_drone")]
+position = Vector2(720, 480)
+
+[node name="Platform" type="StaticBody2D" parent="."]
+position = Vector2(650, 479)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform"]
+shape = SubResource("s_plat")
+one_way_collision = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Platform"]
+position = Vector2(0, -16)
+scale = Vector2(0.32, 0.065)
+texture = ExtResource("plat_tex")
+
+[node name="LevelExit" type="Area2D" parent="."]
+position = Vector2(900, 580)
+script = ExtResource("7_exit")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelExit"]
+position = Vector2(53.5, 6)
+shape = SubResource("s_exit")
+
+[node name="Sprite2D" type="Sprite2D" parent="LevelExit"]
+position = Vector2(45.6, -5.0)
+scale = Vector2(0.158, 0.157)
+texture = ExtResource("10_hole")
+
+[node name="HUD" type="CanvasLayer" parent="."]
+script = ExtResource("4_hud")
+
+[node name="ShardIcon" type="TextureRect" parent="HUD"]
+offset_left = 10.0
+offset_top = 8.0
+offset_right = 254.0
+offset_bottom = 88.0
+texture = SubResource("at_mc")
+expand_mode = 1
+stretch_mode = 6
+metadata/_edit_use_anchors_ = true
+
+[node name="ShardLabel" type="Label" parent="HUD"]
+offset_left = 120.0
+offset_top = 22.0
+offset_right = 248.0
+offset_bottom = 76.0
+theme_override_colors/font_color = Color(0.9098039, 0.7882353, 0.3019608, 1)
+theme_override_font_sizes/font_size = 22
+text = "x 0"
+metadata/_edit_use_anchors_ = true
+
+[node name="HealthShard1" type="TextureRect" parent="HUD"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -38.0
+offset_top = 10.0
+offset_right = -12.0
+offset_bottom = 60.0
+grow_horizontal = 0
+texture = SubResource("at_ls")
+expand_mode = 1
+stretch_mode = 6
+metadata/_edit_use_anchors_ = true
+
+[node name="HealthShard2" type="TextureRect" parent="HUD"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -69.0
+offset_top = 10.0
+offset_right = -43.0
+offset_bottom = 60.0
+grow_horizontal = 0
+texture = SubResource("at_ls")
+expand_mode = 1
+stretch_mode = 6
+metadata/_edit_use_anchors_ = true
+
+[node name="HealthShard3" type="TextureRect" parent="HUD"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -100.0
+offset_top = 10.0
+offset_right = -74.0
+offset_bottom = 60.0
+grow_horizontal = 0
+texture = SubResource("at_ls")
+expand_mode = 1
+stretch_mode = 6
+metadata/_edit_use_anchors_ = true
+
+[node name="LivesLabel" type="Label" parent="HUD"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -120.0
+offset_top = 65.0
+offset_right = -10.0
+offset_bottom = 92.0
+grow_horizontal = 0
+theme_override_colors/font_color = Color(0.9, 0.3, 1, 1)
+theme_override_font_sizes/font_size = 20
+horizontal_alignment = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_music")
+volume_db = -6.0
+autoplay = true
+
+[node name="TouchControls" parent="." instance=ExtResource("0_touch")]
