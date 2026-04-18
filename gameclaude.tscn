@@ -10,7 +10,6 @@
 [ext_resource type="Script" uid="uid://dwkpblhyl2ow0" path="res://level_exit.gd" id="10_exit"]
 [ext_resource type="AudioStream" uid="uid://wjgw140fk230" path="res://echoveil/music/Mist in the Circuit-2.mp3" id="11_music"]
 [ext_resource type="PackedScene" path="res://drone.tscn" id="13_drone"]
-[ext_resource type="PackedScene" path="res://special_rock.tscn" id="14_sr"]
 [ext_resource type="Texture2D" uid="uid://db1t01ixuywr1" path="res://echoveil/platforms/holes exits/hole exits new.PNG" id="15_hole"]
 [ext_resource type="Texture2D" uid="uid://bqvm0mk4h4u14" path="res://echoveil/platforms/Platforms and mourks /76D2A5B2-6585-4555-8C6B-C6D25CF6C6CD-4.png" id="16_cliff"]
 [ext_resource type="Texture2D" uid="uid://f0lwj0rbq0qt" path="res://echoveil/UI/mourk counter/220E297F-BA40-4195-9E91-D295DD553BA9-2.png" id="17_gc_mc"]
@@ -22,7 +21,6 @@
 [ext_resource type="Texture2D" uid="uid://bexa4tk6muxfh" path="res://echoveil/backgrounds/Background update/Untitled_Artwork-5.png" id="bg5_gc"]
 [ext_resource type="Texture2D" uid="uid://bt5s2yeo02jif" path="res://echoveil/backgrounds/Background update/Untitled_Artwork-6.png" id="bg6_gc"]
 [ext_resource type="Texture2D" uid="uid://ba0v157kmp0ca" path="res://echoveil/backgrounds/Background update/Untitled_Artwork-7.png" id="bg7_gc"]
-[ext_resource type="PackedScene" path="res://chest.tscn" id="chest_scene"]
 [ext_resource type="Texture2D" uid="uid://cw1wyoi6ixc0a" path="res://echoveil/platforms/Platforms and mourks /IMG_2812 2.png" id="plat_tex"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e2o6t"]
@@ -31,7 +29,7 @@ size = Vector2(114, 122)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_eow3j"]
 size = Vector2(54.5, 20)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_leftfloor"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_floor"]
 size = Vector2(2927, 20)
 
 [sub_resource type="AtlasTexture" id="AT_gc_mc"]
@@ -42,130 +40,127 @@ region = Rect2(120, 399, 697, 229)
 atlas = ExtResource("18_gc_ls")
 region = Rect2(913, 413, 119, 230)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_exit"]
+[sub_resource type="RectangleShape2D" id="RS_exit"]
 size = Vector2(111, 38)
 
-[sub_resource type="RectangleShape2D" id="RS_gcwall"]
+[sub_resource type="RectangleShape2D" id="RS_wall"]
 size = Vector2(30, 700)
 
-[sub_resource type="AtlasTexture" id="AT_gccliff"]
+[sub_resource type="AtlasTexture" id="AT_cliff"]
 atlas = ExtResource("16_cliff")
 region = Rect2(661, 745, 250, 155)
 
-[sub_resource type="RectangleShape2D" id="RS_smallplat"]
-size = Vector2(104.16667, 38)
+[sub_resource type="RectangleShape2D" id="RS_plat"]
+size = Vector2(208, 38)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_tw763"]
-size = Vector2(1342, 23.5)
+[node name="Game" type="Node2D"]
 
-[node name="Game" type="Node2D" unique_id=1161058939]
-
-[node name="background" type="CanvasLayer" parent="." unique_id=1000006517]
+[node name="background" type="CanvasLayer" parent="."]
 layer = -1
 
-[node name="layer1" type="Node2D" parent="background" unique_id=1199886161]
+[node name="layer1" type="Node2D" parent="background"]
 
-[node name="Sprite2D" type="Sprite2D" parent="background/layer1" unique_id=1347840160]
+[node name="Sprite2D" type="Sprite2D" parent="background/layer1"]
 position = Vector2(576, 324)
 scale = Vector2(0.56595534, 1)
 texture = ExtResource("bg1_gc")
 
-[node name="layer2" type="Node2D" parent="background" unique_id=337948030]
+[node name="layer2" type="Node2D" parent="background"]
 
-[node name="Sprite2D" type="Sprite2D" parent="background/layer2" unique_id=74516611]
+[node name="Sprite2D" type="Sprite2D" parent="background/layer2"]
 position = Vector2(576, 324)
 scale = Vector2(0.5449078, 1)
 texture = ExtResource("bg2_gc")
 
-[node name="layer3" type="Node2D" parent="background" unique_id=1359295579]
+[node name="layer3" type="Node2D" parent="background"]
 
-[node name="Sprite2D" type="Sprite2D" parent="background/layer3" unique_id=347034113]
+[node name="Sprite2D" type="Sprite2D" parent="background/layer3"]
 modulate = Color(1, 1, 1, 0.65)
 position = Vector2(576, 324)
 scale = Vector2(0.542677, 1)
 texture = ExtResource("bg3_gc")
 
-[node name="layer4" type="Node2D" parent="background" unique_id=23088398]
+[node name="layer4" type="Node2D" parent="background"]
 
-[node name="Sprite2D" type="Sprite2D" parent="background/layer4" unique_id=566403662]
+[node name="Sprite2D" type="Sprite2D" parent="background/layer4"]
 position = Vector2(576, 324)
 scale = Vector2(0.54636276, 1)
 texture = ExtResource("bg4_gc")
 
-[node name="layer5" type="Node2D" parent="background" unique_id=125882652]
+[node name="layer5" type="Node2D" parent="background"]
 
-[node name="Sprite2D" type="Sprite2D" parent="background/layer5" unique_id=566265174]
+[node name="Sprite2D" type="Sprite2D" parent="background/layer5"]
 position = Vector2(576, 324)
 scale = Vector2(0.56614935, 1)
 texture = ExtResource("bg5_gc")
 
-[node name="layer6" type="Node2D" parent="background" unique_id=495460802]
+[node name="layer6" type="Node2D" parent="background"]
 
-[node name="Sprite2D" type="Sprite2D" parent="background/layer6" unique_id=1305148847]
+[node name="Sprite2D" type="Sprite2D" parent="background/layer6"]
 position = Vector2(576, 324)
 scale = Vector2(0.5761397, 0.8053031)
 texture = ExtResource("bg6_gc")
 
-[node name="nearlayer" type="Node2D" parent="background" unique_id=1278689398]
+[node name="nearlayer" type="Node2D" parent="background"]
 
-[node name="Sprite2D" type="Sprite2D" parent="background/nearlayer" unique_id=1231864662]
+[node name="Sprite2D" type="Sprite2D" parent="background/nearlayer"]
 position = Vector2(576, 324)
 scale = Vector2(0.5702231, 1)
 texture = ExtResource("bg7_gc")
 
-[node name="Player" type="CharacterBody2D" parent="." unique_id=1770645815 groups=["player"]]
-position = Vector2(200, 300)
+[node name="Player" type="CharacterBody2D" parent="." groups=["player"]]
+position = Vector2(150, 300)
 script = ExtResource("4_jep2d")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player" unique_id=1840483865]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player"]
 position = Vector2(4, 243)
 scale = Vector2(0.52, 0.52)
 sprite_frames = ExtResource("5_pframes")
 animation = &"idle"
 autoplay = "idle"
 
-[node name="FuseSprite" type="AnimatedSprite2D" parent="Player" unique_id=1840483866]
+[node name="FuseSprite" type="AnimatedSprite2D" parent="Player"]
 position = Vector2(40, 100)
 scale = Vector2(0.36, 0.36)
 sprite_frames = ExtResource("5_fframes")
 animation = &"idle"
 autoplay = "idle"
 
-[node name="Axe" type="Sprite2D" parent="Player" unique_id=333333333]
+[node name="Axe" type="Sprite2D" parent="Player"]
 position = Vector2(60, 220)
 scale = Vector2(0.08, 0.08)
 texture = ExtResource("9_axe")
 
-[node name="forme" type="CollisionShape2D" parent="Player" unique_id=629588132]
+[node name="forme" type="CollisionShape2D" parent="Player"]
 position = Vector2(4, 248)
 shape = SubResource("RectangleShape2D_e2o6t")
 
-[node name="PickaxeHitbox" type="Area2D" parent="Player" unique_id=2014489598]
+[node name="PickaxeHitbox" type="Area2D" parent="Player"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/PickaxeHitbox" unique_id=1256773888]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/PickaxeHitbox"]
 position = Vector2(97.25, 227)
 shape = SubResource("RectangleShape2D_eow3j")
 
-[node name="Camera2D" type="Camera2D" parent="Player" unique_id=222222222]
+[node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(0, 182)
 
-[node name="RayCast2D" type="RayCast2D" parent="Player" unique_id=1053819659]
+[node name="RayCast2D" type="RayCast2D" parent="Player"]
 position = Vector2(75, 253)
 target_position = Vector2(50, 0)
 collision_mask = 2
 collide_with_areas = true
 
-[node name="Floor" type="StaticBody2D" parent="." unique_id=2012210779]
+[node name="Floor" type="StaticBody2D" parent="."]
 position = Vector2(1405, 619)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor" unique_id=472077029]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
 position = Vector2(58.5, 0)
-shape = SubResource("RectangleShape2D_leftfloor")
+shape = SubResource("RectangleShape2D_floor")
 
-[node name="HUD" type="CanvasLayer" parent="." unique_id=1395744975]
+[node name="HUD" type="CanvasLayer" parent="."]
 script = ExtResource("7_05srh")
 
-[node name="ShardIcon" type="TextureRect" parent="HUD" unique_id=87802620]
+[node name="ShardIcon" type="TextureRect" parent="HUD"]
 offset_left = 10.0
 offset_top = 8.0
 offset_right = 254.0
@@ -173,8 +168,9 @@ offset_bottom = 88.0
 texture = SubResource("AT_gc_mc")
 expand_mode = 1
 stretch_mode = 6
+metadata/_edit_use_anchors_ = true
 
-[node name="ShardLabel" type="Label" parent="HUD" unique_id=87802621]
+[node name="ShardLabel" type="Label" parent="HUD"]
 offset_left = 120.0
 offset_top = 22.0
 offset_right = 248.0
@@ -182,8 +178,9 @@ offset_bottom = 76.0
 theme_override_colors/font_color = Color(0.9098039, 0.7882353, 0.3019608, 1)
 theme_override_font_sizes/font_size = 22
 text = "x 0"
+metadata/_edit_use_anchors_ = true
 
-[node name="HealthShard1" type="TextureRect" parent="HUD" unique_id=87802624]
+[node name="HealthShard1" type="TextureRect" parent="HUD"]
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -191,11 +188,13 @@ offset_left = -38.0
 offset_top = 10.0
 offset_right = -12.0
 offset_bottom = 60.0
+grow_horizontal = 0
 texture = SubResource("AT_gc_ls")
 expand_mode = 1
 stretch_mode = 6
+metadata/_edit_use_anchors_ = true
 
-[node name="HealthShard2" type="TextureRect" parent="HUD" unique_id=87802625]
+[node name="HealthShard2" type="TextureRect" parent="HUD"]
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -203,11 +202,13 @@ offset_left = -69.0
 offset_top = 10.0
 offset_right = -43.0
 offset_bottom = 60.0
+grow_horizontal = 0
 texture = SubResource("AT_gc_ls")
 expand_mode = 1
 stretch_mode = 6
+metadata/_edit_use_anchors_ = true
 
-[node name="HealthShard3" type="TextureRect" parent="HUD" unique_id=87802626]
+[node name="HealthShard3" type="TextureRect" parent="HUD"]
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -215,11 +216,13 @@ offset_left = -100.0
 offset_top = 10.0
 offset_right = -74.0
 offset_bottom = 60.0
+grow_horizontal = 0
 texture = SubResource("AT_gc_ls")
 expand_mode = 1
 stretch_mode = 6
+metadata/_edit_use_anchors_ = true
 
-[node name="LivesLabel" type="Label" parent="HUD" unique_id=87802623]
+[node name="LivesLabel" type="Label" parent="HUD"]
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -227,168 +230,58 @@ offset_left = -120.0
 offset_top = 65.0
 offset_right = -10.0
 offset_bottom = 92.0
+grow_horizontal = 0
 theme_override_colors/font_color = Color(0.9, 0.3, 1, 1)
 theme_override_font_sizes/font_size = 20
 horizontal_alignment = 2
+metadata/_edit_use_anchors_ = true
 
-[node name="rock" parent="." unique_id=1149330400 instance=ExtResource("8_7eaep")]
-position = Vector2(435, 572)
+[node name="rock" parent="." instance=ExtResource("8_7eaep")]
+position = Vector2(500, 561)
 
-[node name="rock2" parent="." unique_id=1932664036 instance=ExtResource("8_7eaep")]
-position = Vector2(700, 572)
+[node name="Drone1" parent="." instance=ExtResource("13_drone")]
+position = Vector2(750, 490)
 
-[node name="rock3" parent="." unique_id=1932664037 instance=ExtResource("14_sr")]
-position = Vector2(980, 572)
+[node name="Platform1" type="StaticBody2D" parent="."]
+position = Vector2(620, 469)
 
-[node name="rock4" parent="." unique_id=1932664038 instance=ExtResource("8_7eaep")]
-position = Vector2(1250, 572)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform1"]
+shape = SubResource("RS_plat")
+one_way_collision = true
 
-[node name="rock5" parent="." unique_id=1932664039 instance=ExtResource("14_sr")]
-position = Vector2(1550, 572)
+[node name="Sprite2D" type="Sprite2D" parent="Platform1"]
+position = Vector2(0, -26)
+scale = Vector2(0.33, 0.086)
+texture = ExtResource("plat_tex")
 
-[node name="rock6" parent="." unique_id=1932664044 instance=ExtResource("8_7eaep")]
-position = Vector2(1800, 572)
-
-[node name="rock7" parent="." unique_id=1932664045 instance=ExtResource("8_7eaep")]
-position = Vector2(2050, 572)
-
-[node name="rock8" parent="." unique_id=1932664046 instance=ExtResource("8_7eaep")]
-position = Vector2(2250, 572)
-
-[node name="rock9" parent="." unique_id=1932664047 instance=ExtResource("8_7eaep")]
-position = Vector2(2420, 572)
-
-[node name="Drone1" parent="." unique_id=1932664048 instance=ExtResource("13_drone")]
-position = Vector2(850, 538)
-
-[node name="Drone2" parent="." unique_id=1932664049 instance=ExtResource("13_drone")]
-position = Vector2(1680, 538)
-drops_shard = true
-
-[node name="LevelExit" type="Area2D" parent="." unique_id=1932664040]
-position = Vector2(2559, 621)
+[node name="LevelExit" type="Area2D" parent="."]
+position = Vector2(950, 609)
 script = ExtResource("10_exit")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelExit" unique_id=1932664041]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelExit"]
 position = Vector2(53.5, 6)
-shape = SubResource("RectangleShape2D_exit")
+shape = SubResource("RS_exit")
 
-[node name="Sprite2D" type="Sprite2D" parent="LevelExit" unique_id=1394877158]
-position = Vector2(45.600006, -5.000061)
+[node name="Sprite2D" type="Sprite2D" parent="LevelExit"]
+position = Vector2(45.6, -5.0)
 scale = Vector2(0.15807287, 0.15664063)
 texture = ExtResource("15_hole")
 
-[node name="Music" type="AudioStreamPlayer" parent="." unique_id=1932664042]
+[node name="LevelWall" type="StaticBody2D" parent="."]
+position = Vector2(1150, 619)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelWall"]
+position = Vector2(-85, -345)
+shape = SubResource("RS_wall")
+
+[node name="Sprite2D" type="Sprite2D" parent="LevelWall"]
+position = Vector2(16, -89)
+scale = Vector2(0.96599996, 0.982258)
+texture = SubResource("AT_cliff")
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("11_music")
 volume_db = -6.0
 autoplay = true
 
-[node name="TouchControls" parent="." unique_id=1932664043 instance=ExtResource("0_touch")]
-
-[node name="LevelWall" type="StaticBody2D" parent="." unique_id=1251115914]
-position = Vector2(2810, 619)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelWall" unique_id=711562306]
-position = Vector2(-85, -345)
-shape = SubResource("RS_gcwall")
-
-[node name="Sprite2D" type="Sprite2D" parent="LevelWall" unique_id=1854928162]
-position = Vector2(16, -89)
-scale = Vector2(0.96599996, 0.982258)
-texture = SubResource("AT_gccliff")
-
-[node name="Platform1" type="StaticBody2D" parent="." unique_id=1227652357]
-position = Vector2(430, 490)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform1" unique_id=215449724]
-position = Vector2(1682, -348)
-scale = Vector2(2, 1)
-shape = SubResource("RS_smallplat")
-one_way_collision = true
-
-[node name="Sprite2D" type="Sprite2D" parent="Platform1" unique_id=564052966]
-position = Vector2(1678, -383.00003)
-scale = Vector2(0.34995908, 0.12798634)
-texture = ExtResource("plat_tex")
-
-[node name="Platform2" type="StaticBody2D" parent="." unique_id=1933470361]
-position = Vector2(760, 470)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform2" unique_id=343599059]
-position = Vector2(-16, -30)
-shape = SubResource("RS_smallplat")
-one_way_collision = true
-
-[node name="Sprite2D" type="Sprite2D" parent="Platform2" unique_id=157282060]
-position = Vector2(-19, -55.999996)
-scale = Vector2(0.16355681, 0.08593709)
-texture = ExtResource("plat_tex")
-
-[node name="Platform3" type="StaticBody2D" parent="." unique_id=754546745]
-position = Vector2(760, 470)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform3" unique_id=1694743221]
-position = Vector2(1064, -251)
-shape = SubResource("RS_smallplat")
-one_way_collision = true
-
-[node name="Sprite2D" type="Sprite2D" parent="Platform3" unique_id=1940605146]
-position = Vector2(1061, -276)
-scale = Vector2(0.18233848, 0.08593709)
-texture = ExtResource("plat_tex")
-
-[node name="Platform 4" type="StaticBody2D" parent="Platform3" unique_id=783519919]
-position = Vector2(760, 470)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform3/Platform 4" unique_id=576045729]
-position = Vector2(-1159.75, -734)
-scale = Vector2(3, 1)
-shape = SubResource("RS_smallplat")
-one_way_collision = true
-
-[node name="Sprite2D" type="Sprite2D" parent="Platform3/Platform 4" unique_id=206262345]
-position = Vector2(-1164, -742)
-scale = Vector2(0.4799673, 0.236)
-texture = ExtResource("plat_tex")
-
-[node name="LedgePlatform" type="StaticBody2D" parent="." unique_id=790426750]
-position = Vector2(1520, 401.875)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="LedgePlatform" unique_id=421406606]
-position = Vector2(1, -72.625)
-shape = SubResource("RectangleShape2D_tw763")
-one_way_collision = true
-
-[node name="Sprite2D" type="Sprite2D" parent="LedgePlatform" unique_id=783664545]
-position = Vector2(-53.99996, -44.875008)
-scale = Vector2(2.1234667, 0.1558098)
-
-[node name="ledge_rock1" parent="." unique_id=2147212760 instance=ExtResource("8_7eaep")]
-position = Vector2(905, 272)
-
-[node name="ledge_rock2" parent="." unique_id=562213809 instance=ExtResource("8_7eaep")]
-position = Vector2(1055, 272)
-
-[node name="ledge_rock3" parent="." unique_id=171263665 instance=ExtResource("8_7eaep")]
-position = Vector2(1205, 272)
-
-[node name="ledge_rock4" parent="." unique_id=1443570895 instance=ExtResource("14_sr")]
-position = Vector2(1355, 272)
-
-[node name="ledge_rock5" parent="." unique_id=1335887940 instance=ExtResource("8_7eaep")]
-position = Vector2(1505, 272)
-
-[node name="ledge_rock6" parent="." unique_id=1843143147 instance=ExtResource("8_7eaep")]
-position = Vector2(1655, 272)
-
-[node name="ledge_rock7" parent="." unique_id=1817702260 instance=ExtResource("8_7eaep")]
-position = Vector2(1805, 272)
-
-[node name="ledge_rock8" parent="." unique_id=2142682069 instance=ExtResource("8_7eaep")]
-position = Vector2(1955, 272)
-
-[node name="ledge_rock9" parent="." unique_id=1060865222 instance=ExtResource("14_sr")]
-position = Vector2(2105, 272)
-
-[node name="Chest" parent="." unique_id=1251933787 instance=ExtResource("chest_scene")]
-position = Vector2(2166, 42)
+[node name="TouchControls" parent="." instance=ExtResource("0_touch")]

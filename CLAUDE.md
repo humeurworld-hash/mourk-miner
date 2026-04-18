@@ -25,11 +25,23 @@ A Godot 4.6 2D platformer / mining game. Player swings an axe to break rocks, co
 - **Music**: `echoveil/music/Mist in the Circuit-2.mp3` (looping)
 - **SFX**: axe swing, rock break, shard revel in `echoveil/music/animations/`
 
-## Key Scene: gameclaude.tscn (Level 1)
-- Floor split into left/right sections with a gap for the hole exit
-- `LevelHole` placed at (1100, 570) — links to `level2.tscn`
-- Drones added to Level 1
-- Player starts at (200, 300), in group `"player"`
+## Level 1 (gameclaude.tscn) — FRESH START
+Rebuilt clean from scratch. Minimal layout to build on:
+- Game root at (0, 0) — NO offset on root node
+- Floor StaticBody2D at (1405, 619), shape (2927×20) → top surface Y=609
+- Player starts at (150, 300), feet at Y=609 (exactly on floor)
+- Rock at (500, 561) — bottom at Y=609, sits on floor ✓
+- Drone1 at (750, 490) — floating above floor
+- Platform1 at (620, 469), shape (208×38), one-way — top at Y=450, reachable by jump
+- LevelExit at (950, 609) → level2.tscn
+- LevelWall cliff at (1150, 619)
+- Background: CanvasLayer (layer=-1), all sprites at (576, 324), NO layer node offsets
+- HUD + TouchControls unchanged
+
+## What Was In Level 1 Before (Reference)
+9 floor rocks at Y=572, 9 ledge rocks at Y=272 on LedgePlatform, 2 drones, 1 chest,
+4 platforms (Platform1-3 + LedgePlatform), LevelWall cliff at X=2810.
+Special rocks (golden, drop life pickup) mixed in. Full layout in git history.
 
 ## Input Map
 - Move: `ui_left` / `ui_right`
